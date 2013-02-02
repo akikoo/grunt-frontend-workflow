@@ -8,17 +8,17 @@ define(function (require) {
 
     $(function () {
 
-        // Initialize the application router
+        // Initialize the application router.
         var Router = new AppRouter();
 
         Backbone.history.start({
             pushState: false
         });
 
-        // Initialize the application view
+        // Initialize the application view.
         var App = new AppView();
 
-        //Display backbone and underscore versions
+        // Display backbone and underscore versions.
         $('body')
             .append('<div>Backbone version: ' + Backbone.VERSION + '</div>')
             .append('<div>Underscore version: ' + _.VERSION + '</div>');

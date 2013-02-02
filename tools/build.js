@@ -8,20 +8,6 @@
  * node tools/r.js -o tools/build.js
  *
  *
- * baseUrl              : Directory path to the JS source files, relative to the
- *                        'appDir'.
- *
- * appDir               : The top level assets directory, relative to this file.
- *                        All the files from this directory will be copied to 'dir'.
- *
- * dir                  : Directory path to save the output, relative to this file.
- *
- * mainConfigFile       : Configuration, relative to this file.
- *
- * modules              : List of modules that will be optimized. All their
- *                        immediate and deep dependencies will be included.
- *
- *
  * More info            https://github.com/jrburke/r.js/blob/master/build/example.build.js
  *                      https://github.com/ryanfitzer/Example-RequireJS-jQuery-Project
  *                      https://github.com/tbranyen/backbone-boilerplate
@@ -36,11 +22,13 @@
 ({
     // Base paths
     appDir              : '../www',                 // The top level assets directory, relative to this file.
+                                                    // All the files from this directory will be copied to 'dir'.
     dir                 : '../www-built',           // The CSS and JS output dir, relative to this file.
 
-    // Include the main configuration file (paths, shim).
-    mainConfigFile      : '../www/js/config.js',    // Relative to this file.
+    // Include the main configuration file (paths, shim). Relative to this file.
+    mainConfigFile      : '../www/js/config.js',
 
+    // List of modules that will be optimized. All their immediate and deep dependencies will be included.
     modules: [
         //First set up the common build layer. Module names are relative to 'baseUrl'.
         {

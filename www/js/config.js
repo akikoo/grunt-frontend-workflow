@@ -20,25 +20,25 @@
 
 require.config({
 
-    baseUrl: 'js', // The JS source dir, relative to this file and the 'appDir' in build.js
+    baseUrl: 'js', // The JS source dir, relative to this file and the 'appDir' in build.js.
 
     paths: {
 
-        // Core libraries
+        // Core libraries.
         jquery: 'lib/jquery',
         underscore: 'lib/underscore',
         backbone: 'lib/backbone',
 
-        // Templating
+        // Templating.
         handlebars: 'lib/handlebars',
 
-        // Plugins
+        // Plugins.
         text : 'lib/text',
 
-        // Custom helper modules
+        // Custom helper modules.
         // utils: 'app/utils',
 
-        // App folders
+        // App folders.
         collections: 'app/collections',
         models: 'app/models',
         routers: 'app/routers',

@@ -6,12 +6,12 @@ define(['backbone'],
 
         var AlbumModel = Backbone.Model.extend({
 
-            // Default attribute values
+            // Default attribute values.
             defaults: {
                 title: ''
             },
 
-            // Initialize and listen for changes to the model
+            // Initialize and listen for changes to the model.
             initialize: function() {
                 // console.log('This model has been initialized.');
                 this.on('change', function() {
@@ -19,7 +19,7 @@ define(['backbone'],
                 });
             },
 
-            // Gets called automatically by Backbone when the set and/or save methods are called (Add your own logic)
+            // Gets called automatically by Backbone when the set and/or save methods are called.
             validate: function(attrs) {
 
             }

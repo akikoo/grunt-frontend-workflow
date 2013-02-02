@@ -9,7 +9,7 @@ define(['backbone', 'models/album'],
             // Reference to this collection's model.
             model: AlbumModel,
 
-            // URL where to fetch the data
+            // URL where to fetch the data.
             url: '/www/albums.json'
 
         });

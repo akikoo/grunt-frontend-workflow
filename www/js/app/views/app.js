@@ -9,15 +9,12 @@ define(['backbone', 'handlebars', 'collections/albums', 'text!templates/albums.h
             // Instead of generating a new element, bind this view to an existing DOM element.
             el: '#container',
 
-            // Compile our stats template
+            // Compile our stats template.
             template: Handlebars.compile(AlbumsTemplate),
 
-            // View Event Handlers
+            // View Event Handlers.
             events: {
                 /*
-                 'dblclick label': 'edit',
-                 'keypress .edit': 'updateOnEnter',
-                 'blur .edit':   'close'
                  'click button#add': 'addItem'
                  */
             },
