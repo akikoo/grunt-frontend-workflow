@@ -30,7 +30,7 @@
 
     // List of modules that will be optimized. All their immediate and deep dependencies will be included.
     modules: [
-        //First set up the common build layer. Module names are relative to 'baseUrl'.
+        // First set up the common build layer. Module names are relative to 'baseUrl'.
         {
             name        : 'config',
             // List common dependencies here. Only need to list top level
