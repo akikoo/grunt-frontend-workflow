@@ -1,7 +1,12 @@
 /**
  *
  * RequireJS build profile for stylesheets and JavaScript files.
- * Defines paths where to read and write, as well as optimization options.
+ * Defines paths where to read and write.
+ *
+ *
+ * To optimize with Node.js:
+ * node tools/r.js -o tools/build.js
+ *
  *
  * baseUrl              : Directory path to the JS source files, relative to the
  *                        'appDir'.
@@ -11,9 +16,9 @@
  *
  * dir                  : Directory path to save the output, relative to this file.
  *
- * mainConfigFile       : Configuration, relative to the 'baseUrl'.
+ * mainConfigFile       : Configuration, relative to this file.
  *
- * modules              : List the modules that will be optimized. All their
+ * modules              : List of modules that will be optimized. All their
  *                        immediate and deep dependencies will be included.
  *
  *
@@ -23,7 +28,7 @@
  *                      https://github.com/requirejs/example-multipage-shim
  *
  * @author Aki Karkkainen - adapted from https://github.com/requirejs/example-multipage-shim
- * @url https://github.com/akikoo/one-web-boilerplate
+ * @url https://github.com/akikoo/backbone-requirejs-multipage-boilerplate
  * Twitter: http://twitter.com/akikoo
  *
  */

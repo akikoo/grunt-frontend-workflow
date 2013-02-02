@@ -1,3 +1,6 @@
+/**
+ * Initialize App logic for 'page2'
+ */
 define(function (require) {
 
     var AppView     = require('../app/views/app'),
