@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <title>Page 2</title>
+        <!-- Mobile viewport optimization http://goo.gl/b9SaQ -->
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        <a href="page1.html">Go to Page 1</a>
+        <div id="container"></div>
+
+        <script src="js/lib/require.js"></script>
+        <script>
+            //Load common code that includes config, then load the app
+            //logic for this page. Do the require calls here instead of
+            //a separate file so after a build there are only 2 HTTP
+            //requests instead of three.
+            require(['js/config'], function(config) {
+                // js/common sets the baseUrl to be js/ so can just ask for
+                // 'app/main2' here instead of 'js/app/main2'
+                require(['app/main2']);
+            });
+        </script>
+    </body>
+</html>
