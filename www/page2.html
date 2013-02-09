@@ -8,10 +8,41 @@
         <meta name="MobileOptimized" content="320"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    <style>
+        #create {
+            padding: 1em;
+            margin: 1em 0 0;
+            background: #eee;
+        }
+        .is-editable {
+            display: none;
+        }
+        .is-editable-shown {
+            display: block;
+            background: #eee;
+            padding: 0.5em;
+        }
+    </style>
     <body>
 
-        <a href="page1.html">Go to Page 1</a>
-        <div id="container"></div>
+        <div id="page">
+
+            <header role="banner">
+                <h1>Create, Read, Update and Delete items in a list.</h1>
+                <a href="page1.html">Go to Page 1</a>
+            </header>
+
+            <div id="create">
+                <label for="input-create1">Name: </label>
+                <input id="input-create1" class="input-create" type="text" name="input-create1">
+                <button id="btn-create">Create new item</button>
+            </div>
+
+            <ul id="read" role="main"></ul>
+
+            <footer id="footer" role="contentinfo"></footer>
+
+        </div>
 
         <script src="js/lib/require.js"></script>
         <script>
@@ -20,7 +51,7 @@
             // so after a build there are only 2 HTTP requests instead of three.
             require(['js/config'], function(config) {
                 // js/config sets the baseUrl to be js/ so we can just ask for
-                // 'app/main2' here instead of 'js/app/main2'.
+                // `app/main2` here instead of `js/app/main2`.
                 require(['app/main2']);
             });
         </script>

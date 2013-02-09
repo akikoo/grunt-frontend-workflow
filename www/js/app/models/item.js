@@ -1,32 +1,40 @@
+/*
+ * Model.
+ */
+
 define(['backbone'],
 
     function(Backbone) {
 
         'use strict';
 
-        var AlbumModel = Backbone.Model.extend({
+        var Model = Backbone.Model.extend({
 
             // Default attribute values.
             defaults: {
-                title: ''
+                name: '',
+                description: ''
             },
 
             // Initialize and listen for changes to the model.
-            initialize: function() {
+            initialize: function () {
+
                 // console.log('This model has been initialized.');
-                this.on('change', function() {
-                    // console.log('- Values for this model have changed.');
+
+                this.on('change', function () {
+                    // console.log('Values for this model have changed.');
                 });
+
             },
 
             // Gets called automatically by Backbone when the set and/or save methods are called.
-            validate: function(attrs) {
-
+            validate: function (attrs) {
+                // console.log('Before attempting to save.');
             }
 
         });
 
-        return AlbumModel;
+        return Model;
 
     }
 

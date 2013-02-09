@@ -1,51 +1,82 @@
-define(['backbone', 'handlebars', 'collections/albums', 'text!templates/albums.html'],
+/*
+ * Root-level application View.
+ */
 
-    function(Backbone, Handlebars, AlbumsCollection, AlbumsTemplate) {
+define(['backbone', 'collections/items', 'views/item'],
+
+    function(Backbone, ItemsCollection, ItemView) {
 
         'use strict';
 
         var AppView = Backbone.View.extend({
 
-            // Instead of generating a new element, bind this view to an existing DOM element.
-            el: '#container',
+            // Instead of generating a new element, bind this view to the existing skeleton of the App.
+            el: $('#page'),
 
-            // Compile our stats template.
-            template: Handlebars.compile(AlbumsTemplate),
-
-            // View Event Handlers.
+            // Delegate events for creating new items.
             events: {
-                /*
-                 'click button#add': 'addItem'
-                 */
+                'click #btn-create': 'create'
             },
 
-            initialize: function() {
+            // At initialization we bind to the relevant events on the `Items`
+            // collection, when items are added or changed. Kick things off by
+            // loading our initial data.
+            initialize: function () {
 
-                _.bindAll(this, 'render');
+                this.$input = this.$('#input-create1');
+                this.collection = new ItemsCollection();
 
-                this.collection = new AlbumsCollection();
+                // Listen to changes
+                this.listenTo(this.collection, 'add', this.addOne);
+                this.listenTo(this.collection, 'reset', this.addAll);
+                this.listenTo(this.collection, 'all', this.render);
 
-                // Update an entire collection at once.
-                this.collection.on('reset', this.render, this);
+                // Get the data. Fires the 'reset' event when done.
+                this.collection.fetch(); // --> GET
 
-                this.collection.fetch();
-
-                // This is a self rendering view.
-                // this.render();
             },
 
-            // Re-render the titles of the todo item.
-            render: function() {
-
-                $(this.el).html(this.template(this.collection.toJSON()));
+            render: function () {
 
                 // Maintain chainability.
                 return this;
+
+            },
+
+            // Add a single item to the list by creating a view for it, and
+            // appending its element to the `<ul>`.
+            addOne: function (item) {
+
+                var itemView = new ItemView({model: item});
+                $('#read').append(itemView.render().el);
+
+            },
+
+            // Add all items in the collection at once.
+            addAll: function () {
+
+                this.$('#read').html('');
+                this.collection.each(this.addOne, this);
+
+            },
+
+            // Create new model
+            create: function () {
+
+                var value = this.$input.val().trim();
+
+                if (!value) {
+                    return;
+                } else {
+                    this.collection.create({name: value}); // --> POST
+                    this.$input.val('');
+                }
+
             }
 
         });
 
-    return AppView;
+        return AppView;
 
     }
 );
