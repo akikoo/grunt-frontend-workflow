@@ -7,22 +7,22 @@
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #create {
+                padding: 1em;
+                margin: 1em 0 0;
+                background: #eee;
+            }
+            .is-editable {
+                display: none;
+            }
+            .is-editable-shown {
+                display: block;
+                background: #eee;
+                padding: 0.5em;
+            }
+        </style>
     </head>
-    <style>
-        #create {
-            padding: 1em;
-            margin: 1em 0 0;
-            background: #eee;
-        }
-        .is-editable {
-            display: none;
-        }
-        .is-editable-shown {
-            display: block;
-            background: #eee;
-            padding: 0.5em;
-        }
-    </style>
     <body>
 
         <div id="page">
@@ -38,7 +38,7 @@
                 <button id="btn-create">Create new item</button>
             </div>
 
-            <ul id="read" role="main"></ul>
+            <ul id="read" role="main" aria-live="polite"></ul>
 
             <footer id="footer" role="contentinfo"></footer>
 
