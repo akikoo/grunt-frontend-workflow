@@ -20,8 +20,6 @@
 
 require.config({
 
-    baseUrl: 'js', // The JS source dir, relative to this file and the 'appDir' in build.js.
-
     paths: {
 
         // Core libraries.
@@ -35,7 +33,7 @@ require.config({
         // Plugins.
         text : 'lib/text',
 
-        // Custom helper modules.
+        // Custom AMD modules.
         // utils: 'app/utils',
 
         // App folders.

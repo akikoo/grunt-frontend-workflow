@@ -1,5 +1,5 @@
 /*
- * Initialize App logic for `page2`.
+ * Initialize App for `subpage`.
  */
 
 define(function (require) {

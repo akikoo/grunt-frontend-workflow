@@ -29,7 +29,7 @@
 
             <header role="banner">
                 <h1>Create, Read, Update and Delete items in a list.</h1>
-                <a href="page1.html">Go to Page 1</a>
+                <a href="/index.html">Go to Page 1</a>
             </header>
 
             <div id="create">
@@ -44,15 +44,15 @@
 
         </div>
 
-        <script src="js/lib/require.js"></script>
+        <script data-main="/js/config" src="/js/lib/require.js"></script>
         <script>
             // Load common code that includes config, then load the app logic for
             // this page. Do the require calls here instead of a separate file
             // so after a build there are only 2 HTTP requests instead of three.
-            require(['js/config'], function(config) {
+            require(['config'], function(config) {
                 // js/config sets the baseUrl to be js/ so we can just ask for
                 // `app/main2` here instead of `js/app/main2`.
-                require(['app/main2']);
+                require(['app/subpage']);
             });
         </script>
     </body>
