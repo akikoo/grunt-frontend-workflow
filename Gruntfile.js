@@ -69,7 +69,7 @@ module.exports = function (grunt) {
          */
         regarde: {
             css: {
-                files: ['www/scss/*.scss'],
+                files: ['www/scss/**/*.scss'],
                 events: true, 
                 tasks: [
                     'compass', 
