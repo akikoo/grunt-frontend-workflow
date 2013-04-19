@@ -78,7 +78,7 @@ module.exports = function (grunt) {
                 ]
             },
             js: {
-                files: ['www/app/*.js'],
+                files: ['www/js/app/**/*.js'],
                 tasks: [
                     'jshint', 
                     'livereload'
@@ -133,7 +133,7 @@ module.exports = function (grunt) {
         jshint: {
             // Define the files to lint.
             files: [
-                'www/app/*.js' // Only process custom scripts, exclude libraries.
+                'www/js/app/**/*.js' // Only process custom scripts, exclude libraries.
             ],
             // Configure JSHint (documented at http://www.jshint.com/docs/).
             options: {

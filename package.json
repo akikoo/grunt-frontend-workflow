@@ -1,5 +1,5 @@
 {
-    "name": "Backbone and RequireJS multipage boilerplate task runner",
+    "name": "backbone-requirejs-multipage-boilerplate-task-runner",
     "version": "0.1.0",
     "description": "Common automated tasks for modular front-end development",
     "main": "Gruntfile.js",
