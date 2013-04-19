@@ -205,7 +205,11 @@ module.exports = function (grunt) {
                             name: 'config',
                             // List common dependencies here. Only need to list top level dependencies, "include" will find nested dependencies.
                             include: [
-                                'module_1'
+                                'jquery',
+                                'backbone',
+                                'underscore',
+                                'handlebars',
+                                'text'
                             ]
                         },
                         // Now set up a build layer for each main layer, but exclude the common one.
