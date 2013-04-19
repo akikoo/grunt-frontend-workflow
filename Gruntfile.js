@@ -220,7 +220,7 @@ module.exports = function (grunt) {
                         // in play, and shimmed dependencies need to maintain their load order.
                         // In this example, config.js will hold jquery, so backbone needs to be
                         // delayed from loading until config.js finishes. That loading sequence
-                        // is controlled in page1.js.
+                        // is controlled in mainpage.js.
                         {
                             name: 'app/mainpage',
                             exclude: ['config']
