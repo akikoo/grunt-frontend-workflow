@@ -9,8 +9,6 @@
  * 
  */
 
-'use strict';
-
 // Needed for `grunt-contrib-livereload`.
 var path        = require('path'),
     lrSnippet   = require('grunt-contrib-livereload/lib/utils').livereloadSnippet,
@@ -21,8 +19,22 @@ var path        = require('path'),
 // Grunt configuration wrapper function.
 module.exports = function (grunt) {
 
+    'use strict';
+
+    // Configurable paths. 
+    var pathsConfig = {
+        webroot: 'www',
+        dist: 'www-built'
+    };
+
     // Initialize our configuration object.
     grunt.initConfig({
+
+        /*
+         * Get paths. 
+         */
+        path: pathsConfig,
+
 
         /*
          * Get the project metadata.
@@ -33,11 +45,10 @@ module.exports = function (grunt) {
         /*
          * Create a dynamic build header. 
          */
-        banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
             '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-            '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-            ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;' +
+            ' Licensed <%= pkg.license %> */\n',
 
 
         /*
@@ -55,7 +66,7 @@ module.exports = function (grunt) {
             livereload: {
                 options: {
                     port: 9001,
-                    base: 'www', 
+                    base: '<%= path.webroot %>',
                     middleware: function (connect, options) {
                         return [lrSnippet, folderMount(connect, options.base)];
                     }
@@ -69,28 +80,28 @@ module.exports = function (grunt) {
          */
         regarde: {
             html: {
-                files: ['www/**/*.html'],
+                files: ['<%= path.webroot %>/**/*.html'],
                 tasks: [
                     'livereload'
                 ]
             },
             css: {
-                files: ['www/scss/**/*.scss'],
-                events: true, 
+                files: ['<%= path.webroot %>/scss/**/*.scss'],
+                events: true,
                 tasks: [
-                    'compass', 
+                    'compass',
                     'csslint',
                     'livereload'
                 ]
             },
             js: {
-                files: ['www/js/app/**/*.js'],
+                files: ['<%= path.webroot %>/js/app/**/*.js'],
                 tasks: [
-                    'jshint', 
+                    'jshint',
                     'livereload'
                 ]
             }
-        }, 
+        },
 
 
         /*
@@ -99,12 +110,12 @@ module.exports = function (grunt) {
         compass: {
             dist: {
                 options: {
-                    httpPath: "/", 
-                    cssDir: "www/css", 
-                    sassDir: "www/scss", 
-                    imagesDir: "www/img",
-                    javascriptsDir: "www/js", 
-                    outputStyle: "expanded", 
+                    httpPath: '/',
+                    cssDir: '<%= path.webroot %>/css',
+                    sassDir: '<%= path.webroot %>/scss',
+                    imagesDir: '<%= path.webroot %>/img',
+                    javascriptsDir: '<%= path.webroot %>/js',
+                    outputStyle: 'expanded',
                     relativeAssets: true,
                     noLineComments: false,
                     force: true,
@@ -119,11 +130,11 @@ module.exports = function (grunt) {
          */
         csslint: {
             options: {
-                csslintrc: 'www/csslintrc.json' // Get CSSLint options from external file.
+                csslintrc: '<%= path.webroot %>/csslintrc.json' // Get CSSLint options from external file.
             },
             strict: {
                 options: {},
-                src: ['www/css/*.css'] 
+                src: ['<%= path.webroot %>/css/*.css']
             },
             lax: {
                 options: {}
@@ -138,7 +149,8 @@ module.exports = function (grunt) {
         jshint: {
             // Define the files to lint.
             files: [
-                'www/js/app/**/*.js' // Only process custom scripts, exclude libraries.
+                'Gruntfile.js',
+                '<%= path.webroot %>/js/app/**/*.js' // Only process custom scripts, exclude libraries.
             ],
             // Configure JSHint (documented at http://www.jshint.com/docs/).
             options: {
@@ -181,8 +193,8 @@ module.exports = function (grunt) {
                 description: '<%= pkg.description %>',
                 version: '<%= pkg.version %>',
                 options: {
-                    paths: ['www/js/app/'],
-                    outdir: 'www-built/docs/'
+                    paths: ['<%= path.webroot %>/js/app/'],
+                    outdir: '<%= path.dist %>/docs/'
                 }
             }
         },
@@ -195,9 +207,9 @@ module.exports = function (grunt) {
             compile: {
                 options: {
                     baseUrl: 'js',                          // The JS source dir, relative to the 'appDir' if set below. No forward slash here!
-                    appDir: 'www',                          // The top level assets directory, relative to this file. All the files from this directory will be copied to 'dir'.
-                    dir: 'www-built',                       // The CSS and JS output dir, relative to this file.
-                    mainConfigFile: 'www/js/config.js',     // Include the main configuration file (paths, shim). Relative to this file.
+                    appDir: '<%= path.webroot %>',          // The top level assets directory, relative to this file. All the files from this directory will be copied to 'dir'.
+                    dir: '<%= path.dist %>',                // The CSS and JS output dir, relative to this file.
+                    mainConfigFile: '<%= path.webroot %>/js/config.js', // Include the main configuration file (paths, shim). Relative to this file.
                     optimize: 'uglify',                     // (default) uses UglifyJS to minify the code.
                     skipDirOptimize: true,                  // Set to true, to skip optimizing other non-build layer JS files (speeds up builds).
                     optimizeCss: 'standard',                // @import inlining, comment removal and line returns.
@@ -256,19 +268,19 @@ module.exports = function (grunt) {
 
     // The default (DEV) task can be run just by typing "grunt" on the command line.
     grunt.registerTask('default', [
-        'livereload-start', 
-        'connect', 
+        'livereload-start',
+        'connect',
         'regarde'
     ]);
 
 
     // This would be run by typing "grunt dist" on the command line.
     grunt.registerTask('dist', [
-        'compass', 
+        'compass',
         'csslint',
-        'jshint', 
-        'yuidoc', 
-        // 'concat', 
+        'jshint',
+        'yuidoc',
+        // 'concat',
         'requirejs'
     ]);
 
