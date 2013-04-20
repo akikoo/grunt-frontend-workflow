@@ -3,8 +3,9 @@
 ## What is it? 
 
 The Backbone/RequireJS Multipage Boilerplate is a modular framework for developing 
-websites. It supports both **SPA**s (single page applications) and more traditional 
-multi-page setups, managing dependencies with **RequireJS** (http://requirejs.org/). 
+websites with Grunt task runner. It supports both **SPA**s (single page applications) 
+and more traditional multi-page setups, managing dependencies with **RequireJS** 
+(http://requirejs.org/). 
 
 For stylesheets, have a look at One Web Boilerplate (http://akikoo.github.io/one-web-boilerplate/) 
 that uses **Sass** preprocessor (http://sass-lang.com/) and **Compass** 
@@ -50,9 +51,9 @@ That's it. To start developing, simply run
 
     grunt
 
-and go to http://localhost:9001/ to view your site, and start developing. Files 
-are being observed for changes using livereload so you don't even need to refresh 
-the browser. To run the optimized build, run 
+and go to http://localhost:9001/ to view your site. Files are being observed for 
+changes using livereload so you don't need to refresh the browser after saving 
+changes. To run the optimized build, run 
 
     grunt dist
 
