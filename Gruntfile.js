@@ -73,7 +73,7 @@ module.exports = function (grunt) {
                 events: true, 
                 tasks: [
                     'compass', 
-                    'csslint', 
+                    'csslint',
                     'livereload'
                 ]
             },
@@ -150,19 +150,19 @@ module.exports = function (grunt) {
                 boss        : true,
                 eqnull      : true,
                 trailing    : true,
-                browser     : true
-            },
+                browser     : true,
 
-            // Globals.
-            globals: {
-                $           : true,
-                jQuery      : true,
-                Backbone    : true,
-                console     : true,
-                module      : true,
-                document    : true,
-                define      : true,
-                require     : true
+                // Globals.
+                globals: {
+                    $           : true,
+                    jQuery      : true,
+                    Backbone    : true,
+                    console     : true,
+                    module      : true,
+                    document    : true,
+                    define      : true,
+                    require     : true
+                }
             }
         },
 
