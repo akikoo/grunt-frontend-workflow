@@ -10,7 +10,7 @@ and more traditional multi-page setups, managing dependencies with **RequireJS**
 For stylesheets, have a look at One Web Boilerplate (http://akikoo.github.io/one-web-boilerplate/) 
 that uses **Sass** preprocessor (http://sass-lang.com/) and **Compass** 
 (http://compass-style.org/), with **SMACSS** (Scalable and Modular Architecture 
-for CSS, http://smacss.com/) methodology and some **OOCSS** (Object-Oriented CSS, 
+for CSS, http://smacss.com/) and some **OOCSS** (Object-Oriented CSS, 
 http://oocss.org/). 
 
 The goal of this boilerplate is to support modularity and code reuse by organizing 
@@ -43,7 +43,7 @@ After installing grunt-cli, go to the project folder and install grunt locally.
 
     npm install grunt
 
-Now install all the dependencies
+Now install all the dependencies (listed in package.json)
 
     npm install 
 
@@ -53,9 +53,14 @@ That's it. To start developing, simply run
 
 and go to http://localhost:9001/ to view your site. Files are being observed for 
 changes using livereload so you don't need to refresh the browser after saving 
-changes. To run the optimized build, run 
+changes. Stylesheets are generated from Sass files, and CSS and JavaScript files are 
+linted. 
+
+To trigger the optimized build, run 
 
     grunt dist
 
-For more information about the tasks, see documentation in Gruntfile: 
+For details about all the tasks and processes, see documentation in Gruntfile: 
 https://github.com/akikoo/backbone-requirejs-multipage-boilerplate/blob/master/Gruntfile.js
+
+I hope this boilerplate is as useful to you as it is for me. Have fun! 
