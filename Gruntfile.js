@@ -68,6 +68,12 @@ module.exports = function (grunt) {
          * Observe files for changes and run tasks.
          */
         regarde: {
+            html: {
+                files: ['www/**/*.html'],
+                tasks: [
+                    'livereload'
+                ]
+            },
             css: {
                 files: ['www/scss/**/*.scss'],
                 events: true, 
@@ -82,8 +88,7 @@ module.exports = function (grunt) {
                 tasks: [
                     'jshint', 
                     'livereload'
-                ],
-                spawn: true
+                ]
             }
         }, 
 
