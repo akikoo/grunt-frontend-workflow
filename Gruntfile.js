@@ -234,7 +234,7 @@ module.exports = function (grunt) {
                     optimize: 'uglify',                     // (default) uses UglifyJS to minify the code.
                     skipDirOptimize: true,                  // Set to true, to skip optimizing other non-build layer JS files (speeds up builds).
                     optimizeCss: 'standard',                // @import inlining, comment removal and line returns.
-                    fileExclusionRegExp: /^\.|\.((json))|scss$/,       // If the regexp matches, it means the file/directory will be excluded.
+                    fileExclusionRegExp: /^\.|\.((json))|scss$/, // If the regexp matches, it means the file/directory will be excluded.
 
                     // List of modules that will be optimized. All their immediate and deep dependencies will be included.
                     modules: [
