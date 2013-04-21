@@ -1,0 +1,25 @@
+<!-- @include('document_head.html', {
+    "dir": "ltr", 
+    "lang": "en"}
+) -->
+
+<div id="page">
+
+    <header role="banner">
+        <h1>Create, Read, Update and Delete items in a list.</h1>
+        <a href="/subpage/index.html">Go to Page 2</a>
+    </header>
+
+    <div id="create">
+        <label for="input-create1">Name: </label>
+        <input id="input-create1" class="input-create" type="text" name="input-create1">
+        <button id="btn-create">Create new item</button>
+    </div>
+
+    <ul id="read" role="main" aria-live="polite"></ul>
+
+    <footer id="footer" role="contentinfo"></footer>
+
+</div>
+
+<!-- @include('document_footer.html') -->

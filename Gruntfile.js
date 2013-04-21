@@ -82,7 +82,8 @@ module.exports = function (grunt) {
             html: {
                 files: ['<%= path.webroot %>/**/*.html'],
                 tasks: [
-                    'livereload'
+                    'livereload',
+                    'includereplace'
                 ]
             },
             css: {
@@ -201,6 +202,26 @@ module.exports = function (grunt) {
 
 
         /*
+         * Grunt task to include files and replace variables. Allows for parameterised includes.
+         */
+        includereplace: {
+            dist: {
+                options: {
+                    // Global variables available in all files.
+                    globals: {},
+                    // Optional variable prefix & suffix.
+                    prefix: '<!-- @',
+                    suffix: ' -->'
+                },
+                // Files to perform replacements and includes with.
+                src: '<%= path.webroot %>/html/index.html',
+                // Destination directory to copy files to.
+                dest: '<%= path.webroot %>/'
+            }
+        }, 
+
+
+        /*
          * Optimize RequireJS projects using r.js.
          */
         requirejs: {
@@ -263,6 +284,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-include-replace');
     // grunt.loadNpmTasks('grunt-contrib-concat');
 
 

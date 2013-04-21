@@ -1,59 +1,84 @@
-<!DOCTYPE html>
-<html class="no-js" lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8" />
-        <title>Page 1</title>
-        <!-- Mobile viewport optimization http://goo.gl/b9SaQ -->
-        <meta name="HandheldFriendly" content="True">
-        <meta name="MobileOptimized" content="320"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            #create {
-                padding: 1em;
-                margin: 1em 0 0;
-                background: #eee;
-            }
-            .is-editable {
-                display: none;
-            }
-            .is-editable-shown {
-                display: block;
-                background: #eee;
-                padding: 0.5em;
-            }
-        </style>
-    </head>
-    <body>
+<!doctype html>
 
-        <div id="page">
+<!--[if IEMobile 7]>                     <html class="no-js iem7 oldie"  lang="en" dir="ltr"><![endif]-->
+<!--[if lt IE 7]>                        <html class="no-js ie6 oldie"   lang="en" dir="ltr"><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]>             <html class="no-js ie7 oldie"   lang="en" dir="ltr"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]>             <html class="no-js ie8 oldie"   lang="en" dir="ltr"><![endif]-->
+<!--[if gt IE 8]><!-->                   <html class="no-js"             lang="en" dir="ltr"><!--<![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html class="no-js"             lang="en" dir="ltr"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
 
-            <header role="banner">
-                <h1>Create, Read, Update and Delete items in a list.</h1>
-                <a href="/subpage/index.html">Go to Page 2</a>
-            </header>
+<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+Remove this if you use the .htaccess -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
 
-            <div id="create">
-                <label for="input-create1">Name: </label>
-                <input id="input-create1" class="input-create" type="text" name="input-create1">
-                <button id="btn-create">Create new item</button>
-            </div>
+<title>Page 1</title>
+<meta name="description" content="">
+<meta name="author" content="">
 
-            <ul id="read" role="main" aria-live="polite"></ul>
+<!-- Mobile viewport optimization http://goo.gl/b9SaQ -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    #create {
+        padding: 1em;
+        margin: 1em 0 0;
+        background: #eee;
+    }
+    .is-editable {
+        display: none;
+    }
+    .is-editable-shown {
+        display: block;
+        background: #eee;
+        padding: 0.5em;
+    }
+</style>
+        
+<!--[if (gt IE 8) | (IEMobile)]><!--> 
+<link rel="stylesheet" href="/css/main.css"> 
+<!--<![endif]-->
 
-            <footer id="footer" role="contentinfo"></footer>
+<!--[if (lt IE 9) & (!IEMobile)]>
+<link rel="stylesheet" href="/css/main-ie.css">
+<![endif]-->
 
-        </div>
+<!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+<script src="/js/lib/modernizr.min.js"></script>
+</head>
+<body>
 
-        <script data-main="/js/config" src="/js/lib/require.js"></script>
-        <script>
-            // Load common code that includes config, then load the app logic for
-            // this page. Do the require calls here instead of a separate file
-            // so after a build there are only 2 HTTP requests instead of three.
-            require(['config'], function(config) {
-                // js/config sets the baseUrl to be js/ so we can just ask for
-                // `app/main1` here instead of `js/app/main1`.
-                require(['app/mainpage']);
-            });
-        </script>
-    </body>
+<div id="page">
+
+    <header role="banner">
+        <h1>Create, Read, Update and Delete items in a list.</h1>
+        <a href="/subpage/index.html">Go to Page 2</a>
+    </header>
+
+    <div id="create">
+        <label for="input-create1">Name: </label>
+        <input id="input-create1" class="input-create" type="text" name="input-create1">
+        <button id="btn-create">Create new item</button>
+    </div>
+
+    <ul id="read" role="main" aria-live="polite"></ul>
+
+    <footer id="footer" role="contentinfo"></footer>
+
+</div>
+
+<script data-main="/js/config" src="/js/lib/require.js"></script>
+<script>
+    // Load common code that includes config, then load the app logic for
+    // this page. Do the require calls here instead of a separate file
+    // so after a build there are only 2 HTTP requests instead of three.
+    require(['config'], function(config) {
+        // js/config sets the baseUrl to be js/ so we can just ask for
+        // `app/main1` here instead of `js/app/main1`.
+        require(['app/mainpage']);
+    });
+</script>
+</body>
 </html>
