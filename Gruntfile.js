@@ -82,8 +82,8 @@ module.exports = function (grunt) {
             html: {
                 files: ['<%= path.webroot %>/**/*.html'],
                 tasks: [
-                    'livereload',
-                    'includereplace'
+                    'includereplace',
+                    'livereload'
                 ]
             },
             css: {
@@ -218,7 +218,7 @@ module.exports = function (grunt) {
                 // Destination directory to copy files to.
                 dest: '<%= path.webroot %>/'
             }
-        }, 
+        },
 
 
         /*
@@ -234,7 +234,7 @@ module.exports = function (grunt) {
                     optimize: 'uglify',                     // (default) uses UglifyJS to minify the code.
                     skipDirOptimize: true,                  // Set to true, to skip optimizing other non-build layer JS files (speeds up builds).
                     optimizeCss: 'standard',                // @import inlining, comment removal and line returns.
-                    fileExclusionRegExp: /^\.|scss$/,       // If the regexp matches, it means the file/directory will be excluded.
+                    fileExclusionRegExp: /^\.|\.((json))|scss$/,       // If the regexp matches, it means the file/directory will be excluded.
 
                     // List of modules that will be optimized. All their immediate and deep dependencies will be included.
                     modules: [
@@ -298,12 +298,13 @@ module.exports = function (grunt) {
 
     // This would be run by typing "grunt dist" on the command line.
     grunt.registerTask('dist', [
+        'includereplace',
         'compass',
         'csslint',
         'jshint',
-        'yuidoc',
         // 'concat',
-        'requirejs'
+        'requirejs',
+        'yuidoc'
     ]);
 
 };

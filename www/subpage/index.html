@@ -50,8 +50,7 @@
             // this page. Do the require calls here instead of a separate file
             // so after a build there are only 2 HTTP requests instead of three.
             require(['config'], function(config) {
-                // js/config sets the baseUrl to be js/ so we can just ask for
-                // `app/main2` here instead of `js/app/main2`.
+                // baseUrl is js/ so we can just ask for `app/subpage` here instead of `js/app/subpage`.
                 require(['app/subpage']);
             });
         </script>
