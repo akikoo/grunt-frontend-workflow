@@ -75,7 +75,7 @@ Remove this if you use the .htaccess -->
     // this page. Do the require calls here instead of a separate file
     // so after a build there are only 2 HTTP requests instead of three.
     require(['config'], function(config) {
-        // baseUrl is js/ so we can just ask for `app/mainpage` here instead of `js/app/mainpage`.
+        // baseUrl is js/ so we can just ask for `app/main` here instead of `js/app/main`.
         require(['app/mainpage']);
     });
 </script>
