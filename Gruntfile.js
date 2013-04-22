@@ -131,7 +131,7 @@ module.exports = function (grunt) {
          */
         csslint: {
             options: {
-                csslintrc: '<%= path.webroot %>/csslintrc.json' // Get CSSLint options from external file.
+                csslintrc: '.csslintrc' // Get CSSLint options from external file.
             },
             strict: {
                 options: {},
@@ -155,32 +155,7 @@ module.exports = function (grunt) {
             ],
             // Configure JSHint (documented at http://www.jshint.com/docs/).
             options: {
-                bitwise     : true,
-                curly       : true,
-                eqeqeq      : true,
-                forin       : true,
-                immed       : true,
-                latedef     : true,
-                newcap      : true,
-                noarg       : true,
-                sub         : true,
-                undef       : true,
-                boss        : true,
-                eqnull      : true,
-                trailing    : true,
-                browser     : true,
-
-                // Globals.
-                globals: {
-                    $           : true,
-                    jQuery      : true,
-                    Backbone    : true,
-                    console     : true,
-                    module      : true,
-                    document    : true,
-                    define      : true,
-                    require     : true
-                }
+                jshintrc: '.jshintrc'
             }
         },
 
@@ -213,10 +188,12 @@ module.exports = function (grunt) {
                     prefix: '<!-- @',
                     suffix: ' -->'
                 },
-                // Files to perform replacements and includes with.
-                src: '<%= path.webroot %>/html/index.html',
-                // Destination directory to copy files to.
-                dest: '<%= path.webroot %>/'
+                // Source-destination file mappings where the property name is the 
+                // destination directory, and its value is the source file to 
+                // perform replacements and includes with.
+                files: {
+                    '<%= path.webroot %>/': '<%= path.webroot %>/html/index.html'
+                }
             }
         },
 

@@ -44,6 +44,7 @@ require.config({
         views: 'app/views'
     },
 
+    // Dependencies for scripts that are not wrapped as AMD modules.
     shim: {
         backbone: {
             deps: ['jquery', 'underscore'],

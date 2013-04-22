@@ -1,0 +1,26 @@
+{
+    "bitwise": true,
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "immed": true,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,
+    "sub": true,
+    "undef": true,
+    "boss": true,
+    "eqnull": true,
+    "trailing": true,
+    "browser": true,
+    "globals": {
+        "$": true,
+        "jQuery": true,
+        "Backbone": true,
+        "console": true,
+        "module": true,
+        "document": true,
+        "define": true,
+        "require": true
+    }
+}
