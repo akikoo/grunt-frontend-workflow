@@ -17,10 +17,7 @@ The goal of this boilerplate is to support modularity and code reuse by organizi
 code into both common and page-specific packages. RequireJS setup is adapted from 
 https://github.com/requirejs/example-multipage-shim.
 
-Grunt is used for running specified tasks during development. To simply optimize 
-the files without using Grunt, go to the project folder and run:
-
-    node tools/r.js -o tools/build.js
+Grunt is used for running specified tasks during development. 
 
 ##Environment setup 
 
