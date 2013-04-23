@@ -60,13 +60,16 @@ module.exports = function (grunt) {
 
 
         /*
-         * Start a static web server.
+         * Start a static web server. 
+         * DEV URL http://localhost:9001/.
+         * To view the local site on another device on the same LAN, use your master machine's IP address instead, for example http://10.0.0.32:9001/.
          */
         connect: {
             livereload: {
                 options: {
-                    port: 9001,
-                    base: '<%= path.webroot %>',
+                    port: 9001, // The port on which the webserver will respond.
+                    hostname: '*', // Default 'localhost'. Setting this to '*' will make the server accessible from anywhere. Useful for cross-device testing.
+                    base: '<%= path.webroot %>', // The base (or root) directory from which files will be served. Defaults to the project Gruntfile's directory.
                     middleware: function (connect, options) {
                         return [lrSnippet, folderMount(connect, options.base)];
                     }
