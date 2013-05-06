@@ -21,19 +21,20 @@ module.exports = function (grunt) {
 
     'use strict';
 
-    // Configurable paths. 
-    var pathsConfig = {
+    // Configurable paths and other variables. 
+    var config = {
         webroot: 'www',
-        dist: 'www-built'
+        dist: 'www-built',
+        tstamp: '<%= grunt.template.today("ddmmyyyyhhMMss") %>'
     };
 
     // Initialize our configuration object.
     grunt.initConfig({
 
         /*
-         * Get paths. 
+         * Get configuration options. 
          */
-        path: pathsConfig,
+        config: config,
 
 
         /*
@@ -69,7 +70,7 @@ module.exports = function (grunt) {
                 options: {
                     port: 9001, // The port on which the webserver will respond.
                     hostname: '*', // Default 'localhost'. Setting this to '*' will make the server accessible from anywhere. Useful for cross-device testing.
-                    base: '<%= path.webroot %>', // The base (or root) directory from which files will be served. Defaults to the project Gruntfile's directory.
+                    base: '<%= config.webroot %>', // The base (or root) directory from which files will be served. Defaults to the project Gruntfile's directory.
                     middleware: function (connect, options) {
                         return [lrSnippet, folderMount(connect, options.base)];
                     }
@@ -83,14 +84,14 @@ module.exports = function (grunt) {
          */
         regarde: {
             html: {
-                files: ['<%= path.webroot %>/**/*.html'],
+                files: ['<%= config.webroot %>/**/*.html'],
                 tasks: [
                     'includereplace',
                     'livereload'
                 ]
             },
             css: {
-                files: ['<%= path.webroot %>/scss/**/*.scss'],
+                files: ['<%= config.webroot %>/scss/**/*.scss'],
                 events: true,
                 tasks: [
                     'compass',
@@ -99,7 +100,7 @@ module.exports = function (grunt) {
                 ]
             },
             js: {
-                files: ['<%= path.webroot %>/js/app/**/*.js'],
+                files: ['<%= config.webroot %>/js/app/**/*.js'],
                 tasks: [
                     'jshint',
                     'livereload'
@@ -115,10 +116,10 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     httpPath: '/',
-                    cssDir: '<%= path.webroot %>/css',
-                    sassDir: '<%= path.webroot %>/scss',
-                    imagesDir: '<%= path.webroot %>/img',
-                    javascriptsDir: '<%= path.webroot %>/js',
+                    cssDir: '<%= config.webroot %>/css',
+                    sassDir: '<%= config.webroot %>/scss',
+                    imagesDir: '<%= config.webroot %>/img',
+                    javascriptsDir: '<%= config.webroot %>/js',
                     outputStyle: 'expanded',
                     relativeAssets: true,
                     noLineComments: false,
@@ -138,7 +139,7 @@ module.exports = function (grunt) {
             },
             strict: {
                 options: {},
-                src: ['<%= path.webroot %>/css/*.css']
+                src: ['<%= config.webroot %>/css/*.css']
             },
             lax: {
                 options: {}
@@ -154,7 +155,7 @@ module.exports = function (grunt) {
             // Define the files to lint.
             files: [
                 'Gruntfile.js',
-                '<%= path.webroot %>/js/app/**/*.js' // Only process custom scripts, exclude libraries.
+                '<%= config.webroot %>/js/app/**/*.js' // Only process custom scripts, exclude libraries.
             ],
             // Configure JSHint (documented at http://www.jshint.com/docs/).
             options: {
@@ -172,8 +173,8 @@ module.exports = function (grunt) {
                 description: '<%= pkg.description %>',
                 version: '<%= pkg.version %>',
                 options: {
-                    paths: ['<%= path.webroot %>/js/app/'],
-                    outdir: '<%= path.dist %>/docs/'
+                    paths: ['<%= config.webroot %>/js/app/'],
+                    outdir: '<%= config.dist %>/docs/'
                 }
             }
         },
@@ -186,7 +187,9 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     // Global variables available in all files.
-                    globals: {},
+                    globals: {
+                        tstamp: '<%= config.tstamp %>'
+                    },
                     // Optional variable prefix & suffix.
                     prefix: '<!-- @',
                     suffix: ' -->'
@@ -195,7 +198,52 @@ module.exports = function (grunt) {
                 // destination directory, and its value is the source file to 
                 // perform replacements and includes with.
                 files: {
-                    '<%= path.webroot %>/': '<%= path.webroot %>/html/index.html'
+                    '<%= config.webroot %>/': '<%= config.webroot %>/html/index.html'
+                }
+            }
+        },
+
+
+        /*
+         * A mystical CSS icon solution.
+         * See http://filamentgroup.com/lab/grunticon/.
+         * For this to work, you'll need to have PhantomJS installed and its 
+         * executable placed somewhere in the $PATH. 
+         * See http://phantomjs.org/download.html.
+         */
+        grunticon: {
+            makeicons: {
+                options: {
+
+                    // Required config.
+                    src: '<%= config.webroot %>/img/icons',
+                    dest: '<%= config.webroot %>/css/components/modules/icons',
+
+                    // Optional grunticon config properties:
+
+                    // CSS filenames.
+                    datasvgcss: 'icons.data.svg.css',
+                    datapngcss: 'icons.data.png.css',
+                    urlpngcss: 'icons.fallback.css',
+
+                    // Preview HTML filename.
+                    previewhtml: 'preview.html',
+
+                    // Grunticon loader code snippet filename.
+                    loadersnippet: 'grunticon.loader.txt',
+
+                    // Folder name (within dest) for png output.
+                    pngfolder: 'png/',
+
+                    // Prefix for CSS classnames.
+                    cssprefix: 'icon-',
+
+                    // CSS file path prefix - this defaults to "/" and will be 
+                    // placed before the "dest" path when stylesheets are loaded.
+                    // This allows root-relative referencing of the CSS. If you 
+                    // don't want a prefix path, set to to "".
+                    cssbasepath: '/'
+
                 }
             }
         },
@@ -208,9 +256,9 @@ module.exports = function (grunt) {
             compile: {
                 options: {
                     baseUrl: 'js',                          // The JS source dir, relative to the 'appDir' if set below. No forward slash here!
-                    appDir: '<%= path.webroot %>',          // The top level assets directory, relative to this file. All the files from this directory will be copied to 'dir'.
-                    dir: '<%= path.dist %>',                // The CSS and JS output dir, relative to this file.
-                    mainConfigFile: '<%= path.webroot %>/js/config.js', // Include the main configuration file (paths, shim). Relative to this file.
+                    appDir: '<%= config.webroot %>',          // The top level assets directory, relative to this file. All the files from this directory will be copied to 'dir'.
+                    dir: '<%= config.dist %>',                // The CSS and JS output dir, relative to this file.
+                    mainConfigFile: '<%= config.webroot %>/js/config.js', // Include the main configuration file (paths, shim). Relative to this file.
                     optimize: 'uglify',                     // (default) uses UglifyJS to minify the code.
                     skipDirOptimize: true,                  // Set to true, to skip optimizing other non-build layer JS files (speeds up builds).
                     optimizeCss: 'standard',                // @import inlining, comment removal and line returns.
@@ -265,6 +313,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-include-replace');
+    grunt.loadNpmTasks('grunt-grunticon');
     // grunt.loadNpmTasks('grunt-contrib-concat');
 
 
@@ -276,15 +325,22 @@ module.exports = function (grunt) {
     ]);
 
 
-    // This would be run by typing "grunt dist" on the command line.
+    // The optimized production build would be run by typing "grunt dist" on the command line.
     grunt.registerTask('dist', [
         'includereplace',
         'compass',
+        'grunticon',
         'csslint',
         'jshint',
         // 'concat',
         'requirejs',
         'yuidoc'
+    ]);
+
+
+    // The icons generator would be run by typing "grunt icons" on the command line.
+    grunt.registerTask('icons', [
+        'grunticon'
     ]);
 
 };
