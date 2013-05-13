@@ -24,7 +24,7 @@ files = [
     // Choose all the files we want to load with Require.js.
     {pattern: 'www/js/lib/*.js', included: false},       // All external libraries.
     {pattern: 'www/js/app/**/*.js', included: false},    // Our source code.
-    {pattern: 'test/spec/*Spec.js', included: false},        // All the tests.
+    {pattern: 'test/spec/*Spec.js', included: false},    // All the tests.
 
     // Which files do you want to include with <script> tag?
     // 

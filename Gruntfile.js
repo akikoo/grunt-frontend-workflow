@@ -54,14 +54,6 @@ module.exports = function (grunt) {
 
 
         /*
-         * Reload assets live in the browser.
-         */
-        livereload: {
-            port: 35729 // Default livereload listening port.
-        },
-
-
-        /*
          * Start a static web server. 
          * DEV URL http://localhost:9001/.
          * To view the local site on another device on the same LAN, use your master machine's IP address instead, for example http://10.0.0.32:9001/.
@@ -81,30 +73,30 @@ module.exports = function (grunt) {
 
 
         /*
-         * Observe files for changes and run tasks.
+         * Run predefined tasks whenever watched file patterns are added, changed or deleted.
          */
-        regarde: {
+        watch: {
+            options: {
+                // Reload assets live in the browser.
+                livereload: 35729 // Default livereload listening port.
+            },
             html: {
-                files: ['<%= config.webroot %>/**/*.html'],
+                files: ['<%= config.webroot %>/html/*.html'],
                 tasks: [
-                    'includereplace',
-                    'livereload'
+                    'includereplace'
                 ]
             },
             css: {
                 files: ['<%= config.webroot %>/scss/**/*.scss'],
-                events: true,
                 tasks: [
                     'compass',
-                    'csslint',
-                    'livereload'
+                    'csslint'
                 ]
             },
             js: {
                 files: ['<%= config.webroot %>/js/app/**/*.js'],
                 tasks: [
-                    'jshint',
-                    'livereload'
+                    'jshint'
                 ]
             },
             // Run unit tests with karma (server needs to be already running).
@@ -115,7 +107,6 @@ module.exports = function (grunt) {
                 ],
                 tasks: ['karma:unit:run'] //NOTE the :run flag
             }
-
         },
 
 
@@ -332,7 +323,7 @@ module.exports = function (grunt) {
 
 
     // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-regarde');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-livereload');
     grunt.loadNpmTasks('grunt-contrib-compass');
@@ -352,10 +343,9 @@ module.exports = function (grunt) {
         'compass',
         'csslint',
         'jshint',
-        'livereload-start',
         'connect',
         'karma:unit', // On change, run the tests specified in the unit target using the already running karma server.
-        'regarde'
+        'watch'
     ]);
 
 
