@@ -1,9 +1,12 @@
 /*
- * 
- * $Id: karma.conf.js 30 2013-05-13 15:01:18Z akikar $
- * 
  * Karma configuration.
  * 
+ * @author Aki Karkkainen
+ * @url https://github.com/akikoo/backbone-requirejs-multipage-boilerplate
+ * Twitter: http://twitter.com/akikoo
+ * 
+ * See https://github.com/kjbekkelund/karma-requirejs
+ * See http://karma-runner.github.io/0.8/plus/RequireJS.html
  */
 
 // base path, that will be used to resolve files and exclude
