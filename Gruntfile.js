@@ -25,6 +25,7 @@ module.exports = function (grunt) {
     var config = {
         webroot: 'www',
         dist: 'www-built',
+        testroot: 'test',
         tstamp: '<%= grunt.template.today("ddmmyyyyhhMMss") %>'
     };
 
@@ -105,7 +106,16 @@ module.exports = function (grunt) {
                     'jshint',
                     'livereload'
                 ]
+            },
+            // Run unit tests with karma (server needs to be already running).
+            karma: {
+                files: [
+                    '<%= config.webroot %>/js/app/**/*.js',
+                    '<%= config.testroot %>/spec/*Spec.js'
+                ],
+                tasks: ['karma:unit:run'] //NOTE the :run flag
             }
+
         },
 
 
@@ -298,6 +308,24 @@ module.exports = function (grunt) {
                     ]
                 }
             }
+        },
+
+
+        /*
+         * Grunt plugin for karma test runner.
+         */
+        karma: {
+            unit: {
+              configFile: 'karma.conf.js',
+              background: true // Don't block subsequent grunt tasks.
+            },
+            // Continuous integration mode: run tests once in PhantomJS browser.
+            // Run this with `grunt karma:continuous`
+            continuous: {
+                configFile: 'karma.conf.js',
+                singleRun: true,
+                browsers: ['PhantomJS']
+            }
         }
 
     });
@@ -314,13 +342,19 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-include-replace');
     grunt.loadNpmTasks('grunt-grunticon');
+    grunt.loadNpmTasks('grunt-karma');
     // grunt.loadNpmTasks('grunt-contrib-concat');
 
 
     // The default (DEV) task can be run just by typing "grunt" on the command line.
     grunt.registerTask('default', [
+        'includereplace',
+        'compass',
+        'csslint',
+        'jshint',
         'livereload-start',
         'connect',
+        'karma:unit', // On change, run the tests specified in the unit target using the already running karma server.
         'regarde'
     ]);
 
