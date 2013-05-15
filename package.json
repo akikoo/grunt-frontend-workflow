@@ -1,6 +1,6 @@
 {
   "name": "backbone-requirejs-multipage-boilerplate-task-runner",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Common automated tasks for modular front-end development",
   "main": "Gruntfile.js",
   "author": "Aki Karkkainen",
@@ -21,6 +21,7 @@
     "grunt-grunticon": "~0.3.1",
     "grunt-karma": "~0.4.4",
     "karma": "~0.8.5",
-    "grunt-contrib-watch": "~0.4.3"
+    "grunt-contrib-watch": "~0.4.3",
+    "grunt-contrib-imagemin": "~0.1.4"
   }
 }

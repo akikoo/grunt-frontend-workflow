@@ -101,10 +101,7 @@ module.exports = function (grunt) {
             },
             // Run unit tests with karma (server needs to be already running).
             karma: {
-                files: [
-                    '<%= config.webroot %>/js/app/**/*.js',
-                    '<%= config.testroot %>/spec/*Spec.js'
-                ],
+                files: ['<%= config.testroot %>/spec/*Spec.js'],
                 tasks: ['karma:unit:run'] //NOTE the :run flag
             }
         },
@@ -160,7 +157,7 @@ module.exports = function (grunt) {
             ],
             // Configure JSHint (documented at http://www.jshint.com/docs/).
             options: {
-                jshintrc: '.jshintrc'
+                jshintrc: '.jshintrc' // Get JSHint options from external file.
             }
         },
 
@@ -317,6 +314,24 @@ module.exports = function (grunt) {
                 singleRun: true,
                 browsers: ['PhantomJS']
             }
+        },
+
+
+        /*
+         * Minify PNG and JPEG images using OptiPNG and jpegtran.
+         */
+        imagemin: {
+            dist: {
+                options: {
+                    optimizationLevel: 3 // PNG only.
+                },
+                files: [{
+                    expand: true,                       // Enable dynamic expansion.
+                    cwd: '<%= config.webroot %>/img/',  // Src matches are relative to this path.
+                    src: '**/*.{png,jpg,jpeg}',         // Actual pattern(s) to match.
+                    dest: '<%= config.dist %>/img/'     // Destination path prefix.
+                }]
+            }
         }
 
     });
@@ -334,6 +349,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-include-replace');
     grunt.loadNpmTasks('grunt-grunticon');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
     // grunt.loadNpmTasks('grunt-contrib-concat');
 
 
@@ -358,7 +374,8 @@ module.exports = function (grunt) {
         'jshint',
         // 'concat',
         'requirejs',
-        'yuidoc'
+        'yuidoc',
+        'imagemin'
     ]);
 
 
