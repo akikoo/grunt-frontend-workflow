@@ -254,8 +254,8 @@ module.exports = function (grunt) {
             compile: {
                 options: {
                     baseUrl: 'js',                          // The JS source dir, relative to the 'appDir' if set below. No forward slash here!
-                    appDir: '<%= config.webroot %>',          // The top level assets directory, relative to this file. All the files from this directory will be copied to 'dir'.
-                    dir: '<%= config.dist %>',                // The CSS and JS output dir, relative to this file.
+                    appDir: '<%= config.webroot %>',        // The top level assets directory, relative to this file. All the files from this directory will be copied to 'dir'.
+                    dir: '<%= config.dist %>',              // The CSS and JS output dir, relative to this file.
                     mainConfigFile: '<%= config.webroot %>/js/config.js', // Include the main configuration file (paths, shim). Relative to this file.
                     optimize: 'uglify',                     // (default) uses UglifyJS to minify the code.
                     skipDirOptimize: true,                  // Set to true, to skip optimizing other non-build layer JS files (speeds up builds).
@@ -276,13 +276,35 @@ module.exports = function (grunt) {
                                 'text'
                             ]
                         },
+
+
+                        // NOTE: If you're building a Single Page Application, you can combine the shim 
+                        // config with your page logic, resulting in only one http request (plus requirejs itself), 
+                        // like so:
+
+                        /*
+                        {
+                            name: 'config',
+                            // List common dependencies here. Only need to list top level dependencies, "include" will find nested dependencies.
+                            include: [
+                                'jquery',
+                                'backbone',
+                                'underscore',
+                                'handlebars',
+                                'text',
+                                'app/mainpage'
+                            ]
+                        },
+                        */
+
+                        // Otherwise if you have multiple pages, do the following:
                         // Now set up a build layer for each main layer, but exclude the common one.
-                        // "exclude" will exclude the nested, built dependencies from "common".
+                        // "exclude" will exclude the nested, built dependencies from "config".
                         // Any "exclude" that includes built modules should be listed before the
                         // build layer that wants to exclude it. The "mainpage" and "subpage" modules
                         // are **not** the targets of the optimization, because shim config is
                         // in play, and shimmed dependencies need to maintain their load order.
-                        // In this example, config.js will hold jquery, so backbone needs to be
+                        // In this example, config.js will hold jquery, so other scripts need to be
                         // delayed from loading until config.js finishes. That loading sequence
                         // is controlled in mainpage.js.
                         {
