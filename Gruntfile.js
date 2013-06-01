@@ -47,10 +47,10 @@ module.exports = function (grunt) {
         /*
          * Create a dynamic build header. 
          */
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;' +
-            ' Licensed <%= pkg.license %> */\n',
+        banner: '/*! <%= pkg.name %> v<%= pkg.version %> | ' +
+            '<%= grunt.template.today("dd-mm-yyyy-hh:MM:ss") %>\n' +
+            ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %> |' +
+            ' Licensed <%= pkg.license %>\n */\n',
 
 
         /*
@@ -150,15 +150,15 @@ module.exports = function (grunt) {
          * Validate files with JSHint.
          */
         jshint: {
+            // Configure JSHint (documented at http://www.jshint.com/docs/).
+            options: {
+                jshintrc: '.jshintrc' // Get JSHint options from external file.
+            },
             // Define the files to lint.
             files: [
                 'Gruntfile.js',
                 '<%= config.webroot %>/js/app/**/*.js' // Only process custom scripts, exclude libraries.
-            ],
-            // Configure JSHint (documented at http://www.jshint.com/docs/).
-            options: {
-                jshintrc: '.jshintrc' // Get JSHint options from external file.
-            }
+            ]
         },
 
 
@@ -167,13 +167,13 @@ module.exports = function (grunt) {
          */
         yuidoc: {
             compile: {
-                name: '<%= pkg.name %>',
-                description: '<%= pkg.description %>',
-                version: '<%= pkg.version %>',
                 options: {
                     paths: ['<%= config.webroot %>/js/app/'],
                     outdir: '<%= config.dist %>/docs/'
-                }
+                },
+                name: '<%= pkg.name %>',
+                description: '<%= pkg.description %>',
+                version: '<%= pkg.version %>'
             }
         },
 
@@ -354,6 +354,32 @@ module.exports = function (grunt) {
                     dest: '<%= config.dist %>/img/'     // Destination path prefix.
                 }]
             }
+        },
+
+
+        /*
+         * Concatenate dynamic banner information to built CSS and JS files.
+         */
+        concat: {
+            options: {
+                stripBanners: true,                     // Strip any existing JavaScript banner comments from source files.
+                banner: '<%= banner %>'                 // Get dynamic build header.
+            },
+            dist: {
+                files: [
+                    {
+                        expand: true,                   // Enable dynamic expansion.
+                        cwd: '<%= config.dist %>/',     // Src matches are relative to this path.
+                        src: [                          // Actual pattern(s) to match.
+                            'css/*.css',                // Process only main css files in CSS root.
+                            'js/app/*.js',              // Process only main js files in JS app root.
+                            'js/config.js'              // Process also the common layer. 
+                        ],
+                        dest: '<%= config.dist %>/',    // Destination path prefix.
+                        nonull: false                   // Set nonull to true if you want the concat task to warn if a given file is missing or invalid.
+                    }
+                ]
+            }
         }
 
     });
@@ -372,7 +398,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-grunticon');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
-    // grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
 
     // The default (DEV) task can be run just by typing "grunt" on the command line.
@@ -394,10 +420,10 @@ module.exports = function (grunt) {
         'grunticon',
         'csslint',
         'jshint',
-        // 'concat',
         'requirejs',
         'yuidoc',
-        'imagemin'
+        'imagemin',
+        'concat'
     ]);
 
 
