@@ -1,14 +1,15 @@
-# Grunt Front-End Workflow with modular boilerplate code
+# Grunt Front-End Workflow/Boilerplate
 
 ## What is it? 
 
-The Backbone/RequireJS Multipage Boilerplate has changed since its initial release. 
-It's now a structured, modular and test-driven development and build workflow with 
-Grunt task runner that suggests certain tools and methodologies, along with some 
-boilerplate code. It supports both **SPA**s (single page applications) 
-and more traditional multi-page setups, managing dependencies with **RequireJS** 
-(http://requirejs.org/). See the related blog post: 
-http://www.akikoo.org/log/2013/05/26/front-end-workflow-with-grunt/
+The Grunt Front-End Workflow/Boilerplate started as Backbone/RequireJS Multipage 
+Boilerplate. Since its initial release, it has evolved into a structured, modular 
+and test-driven development and build workflow with Grunt task runner that suggests 
+certain tools and methodologies, along with some boilerplate code. See the related 
+blog post: http://www.akikoo.org/log/2013/05/26/front-end-workflow-with-grunt/.
+
+It supports both **SPA**s (single page applications) and more traditional multi-page 
+setups, managing dependencies with **RequireJS** (http://requirejs.org/). 
 
 For stylesheets, have a look at One Web Boilerplate (http://akikoo.github.io/one-web-boilerplate/) 
 that uses **Sass** preprocessor (http://sass-lang.com/) and **Compass** 
@@ -60,6 +61,9 @@ listed in the current directory's bower.json.
 ###Grunt
 See http://gruntjs.com/getting-started.
 
+    npm uninstall -g grunt
+    npm install -g grunt-cli
+
 After installing grunt-cli (Grunt's command line interface) globally, go to the 
 project folder and install grunt locally.
 
@@ -73,7 +77,7 @@ That's it.
 
 ##Development and build
 
-To start developing, go to the project folder in your terminal and simply run
+To start developing, go to the project folder in your terminal and run
 
     grunt 
 

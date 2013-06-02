@@ -1,10 +1,17 @@
 {
-    "name": "Frontend-Grunt-Workflow",
+    "name": "Grunt-Frontend-Workflow",
     "version": "1.0.5",
-    "description": "Common automated tasks for modular front-end development",
+    "description": "Structured, modular and test-driven front-end development and build workflow with Grunt, including common tasks such as compiling modular html patterns, compiling AMD based modules using RequireJS, watching/compiling Sass/Compass modules into CSS, watching/linting CSS/JS code, optimizing images, generating icons, generating dynamic build headers and YUIdoc documentation, and running unit tests.",
     "main": "Gruntfile.js",
-    "author": "Aki Karkkainen",
-    "license": "MIT license",
+    "author": {
+        "name": "Aki Karkkainen",
+        "url": "http://www.akikoo.org/"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/akikoo/backbone-requirejs-multipage-boilerplate.git"
+    },
     "readmeFilename": "README.md",
     "dependencies": {},
     "devDependencies": {
@@ -23,5 +30,25 @@
         "karma": "~0.8.5",
         "grunt-contrib-watch": "~0.4.4",
         "grunt-contrib-imagemin": "~0.1.4"
-    }
+    },
+    "keywords": [
+        "grunt",
+        "gruntjs",
+        "workflow",
+        "boilerplate",
+        "replace",
+        "sass",
+        "compass",
+        "grunticon",
+        "csslint",
+        "jshint",
+        "connect",
+        "karma",
+        "watch",
+        "livereload",
+        "requirejs",
+        "yuidoc",
+        "imagemin",
+        "concat"
+    ]
 }

@@ -1,5 +1,6 @@
 /*
- * Gruntfile for Backbone/RequireJS multipage boilerplate. 
+ * Gruntfile for the Grunt Front-End Workflow/Boilerplate
+ * (previously called Backbone/RequireJS multipage boilerplate). 
  * 
  * DEV URL: http://localhost:9001/
  * 
@@ -420,6 +421,8 @@ module.exports = function (grunt) {
         'grunticon',
         'csslint',
         'jshint',
+        'connect',
+        'karma:continuous', // Run the tests specified in the continuous target using the already running karma server.
         'requirejs',
         'yuidoc',
         'imagemin',
