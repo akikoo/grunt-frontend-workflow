@@ -206,9 +206,6 @@ module.exports = function (grunt) {
         /*
          * A mystical CSS icon solution.
          * See http://filamentgroup.com/lab/grunticon/.
-         * For this to work, you'll need to have PhantomJS installed and its 
-         * executable placed somewhere in the $PATH. 
-         * See http://phantomjs.org/download.html.
          */
         grunticon: {
             makeicons: {

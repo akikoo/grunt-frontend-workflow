@@ -4,8 +4,8 @@
 
 The Grunt Front-End Workflow/Boilerplate started as Backbone/RequireJS Multipage 
 Boilerplate. Since its initial release, it has evolved into a structured, modular 
-and test-driven front-end development and build workflow with Grunt task runner 
-that suggests certain tools and methodologies, along with some boilerplate code. 
+and test-driven front-end development & build workflow with Grunt task runner. 
+It suggests certain tools and methodologies and includes some boilerplate code. 
 See the related blog post: http://www.akikoo.org/log/2013/05/26/front-end-workflow-with-grunt/.
 
 It supports both **SPA**s (single page applications) and more traditional multi-page 
@@ -23,6 +23,18 @@ https://github.com/requirejs/example-multipage-shim.
 
 Grunt is used for running specified tasks during development. It's also used for 
 creating builds.
+
+Currently the following common tasks are included: 
+
+* Compile modular html patterns (you can use variables and pass in data too), 
+* Compile AMD based modules using RequireJS, 
+* Watch/compile Sass/Compass modules into CSS, 
+* Watch/lint CSS/JS code, 
+* Optimize images, 
+* Generate sharp vector icons to all devices, 
+* Generate dynamic build headers 
+* Generate YUIdoc documentation, and
+* Run unit tests in different browsers.
 
 ##Environment setup 
 
@@ -75,7 +87,7 @@ Now install all the dependencies (listed in package.json)
 
 That's it. 
 
-##Development and build
+##Development
 
 To start developing, go to the project folder in your terminal and run
 
@@ -86,6 +98,8 @@ local site from another device on the same LAN by using your IP address instead
 of `localhost`, for example http://10.0.0.32:9001/. Files are being observed 
 for changes using livereload so you don't need to refresh the page manually. 
 Stylesheets are generated from Sass files, and CSS and JavaScript files are linted.
+
+##Build
 
 To trigger the optimized build, go to the project folder and run 
 
