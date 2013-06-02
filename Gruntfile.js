@@ -5,7 +5,7 @@
  * DEV URL: http://localhost:9001/
  * 
  * @author Aki Karkkainen
- * @url https://github.com/akikoo/backbone-requirejs-multipage-boilerplate
+ * @url https://github.com/akikoo/grunt-frontend-workflow
  * Twitter: http://twitter.com/akikoo
  * 
  */

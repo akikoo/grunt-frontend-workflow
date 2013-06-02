@@ -2,7 +2,7 @@
  * Configures Require.js for the tests.
  * 
  * @author Aki Karkkainen
- * @url https://github.com/akikoo/backbone-requirejs-multipage-boilerplate
+ * @url https://github.com/akikoo/grunt-frontend-workflow
  * Twitter: http://twitter.com/akikoo
  * 
  * See also https://github.com/kjbekkelund/karma-requirejs

@@ -2,7 +2,7 @@
  * Karma configuration.
  * 
  * @author Aki Karkkainen
- * @url https://github.com/akikoo/backbone-requirejs-multipage-boilerplate
+ * @url https://github.com/akikoo/grunt-frontend-workflow
  * Twitter: http://twitter.com/akikoo
  * 
  * See https://github.com/kjbekkelund/karma-requirejs

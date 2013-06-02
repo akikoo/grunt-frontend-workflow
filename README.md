@@ -4,9 +4,9 @@
 
 The Grunt Front-End Workflow/Boilerplate started as Backbone/RequireJS Multipage 
 Boilerplate. Since its initial release, it has evolved into a structured, modular 
-and test-driven development and build workflow with Grunt task runner that suggests 
-certain tools and methodologies, along with some boilerplate code. See the related 
-blog post: http://www.akikoo.org/log/2013/05/26/front-end-workflow-with-grunt/.
+and test-driven front-end development and build workflow with Grunt task runner 
+that suggests certain tools and methodologies, along with some boilerplate code. 
+See the related blog post: http://www.akikoo.org/log/2013/05/26/front-end-workflow-with-grunt/.
 
 It supports both **SPA**s (single page applications) and more traditional multi-page 
 setups, managing dependencies with **RequireJS** (http://requirejs.org/). 
@@ -96,8 +96,8 @@ directory, ready for deployment. You also get YUIDoc documentation generated fro
 your JavaScript files so remember to always comment your code ;).
 
 For details about all the tasks and processes, see documentation in Gruntfile: 
-https://github.com/akikoo/backbone-requirejs-multipage-boilerplate/blob/master/Gruntfile.js, 
-and other files.
+https://github.com/akikoo/grunt-frontend-workflow/blob/master/Gruntfile.js, and 
+other files.
 
 Be sure to exclude `.sass-cache`, `node_modules` and `webroot-built` directories from version control.
 

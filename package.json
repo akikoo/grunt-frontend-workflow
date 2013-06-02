@@ -10,7 +10,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git://github.com/akikoo/backbone-requirejs-multipage-boilerplate.git"
+        "url": "git://github.com/akikoo/grunt-frontend-workflow.git"
     },
     "readmeFilename": "README.md",
     "dependencies": {},

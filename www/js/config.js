@@ -13,7 +13,7 @@
  *                      https://github.com/requirejs/example-multipage-shim
  *
  * @author Aki Karkkainen - adapted from https://github.com/requirejs/example-multipage-shim
- * @url https://github.com/akikoo/backbone-requirejs-multipage-boilerplate
+ * @url https://github.com/akikoo/grunt-frontend-workflow
  * Twitter: http://twitter.com/akikoo
  *
  */
