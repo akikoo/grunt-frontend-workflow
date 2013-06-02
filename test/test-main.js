@@ -24,15 +24,15 @@ requirejs.config({
     paths: {
 
         // Core libraries.
-        jquery: '../js/lib/jquery',
-        underscore: '../js/lib/underscore',
-        backbone: '../js/lib/backbone',
+        jquery: '../js/lib/jquery/jquery',
+        underscore: '../js/lib/underscore/underscore',
+        backbone: '../js/lib/backbone/backbone',
 
         // Templating.
-        handlebars: '../lib/handlebars',
+        handlebars: '../lib/handlebars/handlebars',
 
         // Plugins.
-        text: '../lib/text',
+        text: '../lib/requirejs-text/text',
 
         // Custom AMD modules.
         // utils: 'app/utils',

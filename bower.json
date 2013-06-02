@@ -1,0 +1,19 @@
+{
+    "name": "Frontend-Grunt-Workflow",
+    "version": "1.0.5",
+    "main": "",
+    "ignore": [
+        "**/.*",
+        "**/*.txt",
+        "node_modules"
+    ],
+    "dependencies": {
+        "jquery": "~1.9.0",
+        "backbone": "~1.0.0",
+        "handlebars": "~1.0.0-rc.4",
+        "requirejs": "~2.1.6",
+        "requirejs-text": "~2.0.6",
+        "underscore": "~1.4.4"
+    },
+    "devDependencies": {}
+}

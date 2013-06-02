@@ -1,6 +1,6 @@
 {
     "name": "Frontend-Grunt-Workflow",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Common automated tasks for modular front-end development",
     "main": "Gruntfile.js",
     "author": "Aki Karkkainen",

@@ -23,15 +23,15 @@ require.config({
     paths: {
 
         // Core libraries.
-        jquery: 'lib/jquery',
-        underscore: 'lib/underscore',
-        backbone: 'lib/backbone',
+        jquery: 'lib/jquery/jquery',
+        underscore: 'lib/underscore/underscore',
+        backbone: 'lib/backbone/backbone',
 
         // Templating.
-        handlebars: 'lib/handlebars',
+        handlebars: 'lib/handlebars/handlebars',
 
         // Plugins.
-        text : 'lib/text',
+        text : 'lib/requirejs-text/text',
 
         // Custom AMD modules.
         // utils: 'app/utils',
