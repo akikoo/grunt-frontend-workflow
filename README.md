@@ -24,7 +24,7 @@ https://github.com/requirejs/example-multipage-shim.
 Grunt is used for running specified tasks during development. It's also used for 
 creating builds.
 
-Currently the following common tasks are included: 
+###Currently the following common tasks are included: 
 
 * Compile modular html patterns (you can use variables and pass in data too), 
 * Compile AMD based modules using RequireJS, 
