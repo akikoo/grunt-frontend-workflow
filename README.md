@@ -15,7 +15,8 @@ For stylesheets, have a look at One Web Boilerplate (http://akikoo.github.io/one
 that uses **Sass** preprocessor (http://sass-lang.com/) and **Compass** 
 (http://compass-style.org/), with **SMACSS** (Scalable and Modular Architecture 
 for CSS, http://smacss.com/) and some **OOCSS** (Object-Oriented CSS, 
-http://oocss.org/). 
+http://oocss.org/). You can just drop the whole /webroot/assets/scss directory from 
+One Web Boilerplate into /www directory in Grunt Front-End Workflow and it will work.
 
 The goal of this workflow is to support modularity and code reuse by organizing 
 code into both common and page-specific packages. RequireJS setup is adapted from 
