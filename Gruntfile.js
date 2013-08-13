@@ -196,9 +196,10 @@ module.exports = function (grunt) {
                 // Source-destination file mappings where the property name is the 
                 // destination directory, and its value is the source file to 
                 // perform replacements and includes with.
-                files: {
-                    '<%= config.webroot %>/': '<%= config.webroot %>/html/index.html'
-                }
+                files: [
+                    {'<%= config.webroot %>/': '<%= config.webroot %>/html/index.html'},
+                    {'<%= config.webroot %>/': '<%= config.webroot %>/html/styleguide.html'}
+                ]
             }
         },
 

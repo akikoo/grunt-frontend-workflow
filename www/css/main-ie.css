@@ -1,0 +1,935 @@
+@import url(../../css/common/normalize.css);
+/*
+  The stylesheets are imported in the following order:
+
+                | @import "settings";                                   |
+                | @import "functions/all";                              |
+                | @import "mixins/all";                                 |
+                | @import "common/base";                                |
+                |     @import "../../assets/css/common/normalize.css";  | 
+                |     @import "elements";                               | 
+                |     @import "utilities";                              | 
+                |                                                       |
+                | @import "components/layout";                          |   
+main.scss -->   |                                                       |  --> main.css
+                | @import "components/module";                          |
+                |     @import "modules/styleguide";                     |
+                |     @import "modules/media-object";                   |
+                |     @import "modules/buttons";                        |
+                |     @import "modules/forms";                          |
+                |     ...all other modules...                           |
+                |                                                       |
+                | @import "components/state";                           |
+                | @import "components/theme";                           |
+
+*/
+/* Base sizes */
+/* browser default */
+/* Font stacks */
+/* 480/16 */
+/* 768/16 */
+/* 992/16 */
+/* 1382/16 */
+/* ==========================================================================
+   @group Base imports
+   ========================================================================== */
+/* 1. Reset styles, keep this outside CSSLint check as it's 3rd party code */
+/* ==========================================================================
+   Contents
+   ========================================================================== */
+/**
+ * BASE.........................Global base styles
+ * LINKS........................Default link styles and states
+ * TYPOGRAPHY...................Font, sizes, line heights
+ * GROUPED DECLARATIONS.........Global grouped styles
+ * LISTS........................Ordered, unordered and definition lists
+ * EMBEDDED CONTENT.............Image, video etc.
+ * FIGURES......................Figure styles
+ * FORMS........................See Forms module
+ * TABLES.......................Global table styles
+ */
+/* ==========================================================================
+   @group Base
+   ========================================================================== */
+/* Enable this if you want to reset ALL paddings and margins; CSSLint will throw 
+   a warning though.
+* {
+    margin: 0;
+    padding: 0;
+}
+*/
+/* 
+ * Apply a natural box layout model to all elements.
+ * http://paulirish.com/2012/box-sizing-border-box-ftw/
+ */
+/* The placeholder rule */
+/* The box model conditional */
+/* line 63, ../scss/common/_elements.scss */
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Individual component conditional override example
+.element { 
+    @if $global-border-box-model == false { 
+        @extend %border-box-model;
+    } 
+}
+*/
+/* line 81, ../scss/common/_elements.scss */
+html,
+button,
+input,
+select,
+textarea {
+  color: #222222;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 86, ../scss/common/_elements.scss */
+body {
+  font-size: 1em;
+  /* 16px */
+  line-height: 1.5;
+  /* 24px */
+  margin: 2em 10px;
+}
+
+/* 
+ * =hr (a better looking default horizontal rule)
+ */
+/* line 95, ../scss/common/_elements.scss */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #dddddd;
+  margin: 1.5em 0;
+  padding: 0;
+}
+
+/* ==========================================================================
+   @group Links
+   ========================================================================== */
+/* line 108, ../scss/common/_elements.scss */
+a {
+  color: #3399cc;
+  text-decoration: none;
+  border-bottom: 1px solid #3399cc;
+  white-space: pre-wrap;
+}
+
+/* line 120, ../scss/common/_elements.scss */
+a:hover,
+a:active {
+  color: #3399cc;
+  border-bottom-color: #dddddd;
+}
+
+/* ==========================================================================
+   @group Typography
+   ========================================================================== */
+/* 
+ * Typefaces: Sans-serif
+ */
+/* 
+ * Typefaces: Serif
+ */
+/* line 144, ../scss/common/_elements.scss */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #222222;
+}
+
+/**
+ * Double-stranded heading hierarchy. 
+ * See http://csswizardry.com/2012/02/pragmatic-practical-font-sizing-in-css/
+ */
+/* line 153, ../scss/common/_elements.scss */
+h1,
+.h1 {
+  font-size: 3em;
+  line-height: 1;
+  margin: 0.5em 0;
+}
+
+/* line 160, ../scss/common/_elements.scss */
+h2,
+.h2 {
+  font-size: 1.5em;
+  line-height: 1;
+  margin: 1em 0;
+}
+
+/* line 167, ../scss/common/_elements.scss */
+h3,
+.h3 {
+  color: black;
+  font-size: 1.3125em;
+  line-height: 1.14285714285714;
+  margin: 1.14285714285714em 0;
+}
+
+/* line 175, ../scss/common/_elements.scss */
+h4,
+.h4 {
+  font-size: 1.125em;
+  line-height: 1.33333333333333;
+  margin: 1.33333333333333em 0;
+}
+
+/* line 182, ../scss/common/_elements.scss */
+h5,
+.h5 {
+  font-size: 1em;
+  line-height: 1.5;
+  margin: 1.5em 0;
+  text-transform: uppercase;
+  letter-spacing: 0.071428571428571em;
+}
+
+/* line 191, ../scss/common/_elements.scss */
+h6,
+.h6 {
+  font-size: 0.875em;
+  line-height: 1.71428571428571;
+  margin: 1.71428571428571em 0;
+  text-transform: uppercase;
+  letter-spacing: 0.083333333333333em;
+}
+
+/* line 199, ../scss/common/_elements.scss */
+blockquote {
+  margin: 0 40px 1.5em;
+}
+
+/* line 204, ../scss/common/_elements.scss */
+p,
+pre {
+  line-height: 1.5;
+  margin: 0 0 1.5em;
+}
+
+/* ==========================================================================
+   @group Grouped declarations
+   ========================================================================== */
+/* line 220, ../scss/common/_elements.scss */
+ul,
+ol,
+dl,
+menu,
+hr,
+table,
+form,
+fieldset {
+  margin: 0 0 1.5em;
+}
+
+/* ==========================================================================
+   @group Lists
+   ========================================================================== */
+/* line 232, ../scss/common/_elements.scss */
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin: 0;
+}
+
+/* line 236, ../scss/common/_elements.scss */
+dt {
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   @group Embedded content
+   ========================================================================== */
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+/* line 248, ../scss/common/_elements.scss */
+img {
+  vertical-align: middle;
+}
+
+/* line 252, ../scss/common/_elements.scss */
+img {
+  background: #fff;
+  border: 1px solid #dddddd;
+  display: block;
+  margin: 0;
+  max-width: 97%;
+  padding: 5px;
+}
+
+/*
+ * Flexible images and embedded videos
+ */
+/* line 270, ../scss/common/_elements.scss */
+img,
+audio,
+video,
+object,
+embed,
+svg {
+  max-width: 100%;
+  height: auto;
+  /* http://www.brucelawson.co.uk/2012/responsive-web-design-preserving-images-aspect-ratio/ */
+}
+
+/* ==========================================================================
+   @group Figures
+   ========================================================================== */
+/* ==========================================================================
+   @group Forms - see Forms module!
+   ========================================================================== */
+/* ==========================================================================
+   @group Tables
+   ========================================================================== */
+/* line 289, ../scss/common/_elements.scss */
+table {
+  border-top: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+}
+
+/* line 294, ../scss/common/_elements.scss */
+caption {
+  font-weight: bold;
+  text-align: left;
+}
+
+/* line 300, ../scss/common/_elements.scss */
+td,
+th {
+  text-align: left;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  padding: 2px 6px;
+}
+
+/* line 307, ../scss/common/_elements.scss */
+th {
+  background: #eeeeee;
+}
+
+/* 2. Mobile first base styles (SCSS partial) */
+/* ==========================================================================
+   Contents
+   ========================================================================== */
+/**
+ * H5BP.........................HTML5 Boilerplate helpers
+ * OTHER........................Various other helpers
+ */
+/* ==========================================================================
+   @group Utilities (H5BP). Helper classes from the HTML5 Mobile boilerplate.
+   ========================================================================== */
+/* Prevent callout */
+/* line 33, ../scss/common/_utilities.scss */
+.nocallout {
+  -webkit-touch-callout: none;
+}
+
+/* line 37, ../scss/common/_utilities.scss */
+.pressed {
+  background-color: #999;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* A hack for HTML5 contenteditable attribute on mobile */
+/* line 43, ../scss/common/_utilities.scss */
+textarea[contenteditable] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* A workaround for S60 3.x and 5.0 devices which do not animated gif images if
+   they have been set as display: none */
+/* line 50, ../scss/common/_utilities.scss */
+.gifhidden {
+  position: absolute;
+  left: -100%;
+}
+
+/*
+ * Image replacement
+ */
+/* line 58, ../scss/common/_utilities.scss */
+.ir {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: 0;
+  direction: ltr;
+  display: block;
+  overflow: hidden;
+  text-align: left;
+  text-indent: -999em;
+}
+
+/* line 69, ../scss/common/_utilities.scss */
+.ir br {
+  display: none;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+/* line 76, ../scss/common/_utilities.scss */
+.is-hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+/* line 84, ../scss/common/_utilities.scss */
+.is-visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+/* line 100, ../scss/common/_utilities.scss */
+.is-visuallyhidden.focusable:active,
+.is-visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+/* line 112, ../scss/common/_utilities.scss */
+.is-invisible {
+  visibility: hidden;
+}
+
+/* ==========================================================================
+   @group Utilities (other)
+   ========================================================================== */
+/* 
+ * Visually hiding content that will be read by a screen reader.
+ */
+/*a*/
+/* line 125, ../scss/common/_utilities.scss */
+.accessibility {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Active when the user tabs to the link */
+/*a*/
+/* line 135, ../scss/common/_utilities.scss */
+.accessibility:focus {
+  position: static;
+  width: auto;
+  height: auto;
+}
+
+/* line 141, ../scss/common/_utilities.scss */
+.break-word {
+  word-wrap: break-word;
+}
+
+/* line 145, ../scss/common/_utilities.scss */
+.is-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* 3. HTML5 boilerplate helper classes (SCSS partial) */
+/* 1. Reset, base elements, utilities */
+/**
+ * How to generate files for both modern browsers and oldIE, from the same source:
+ * 
+ * .selector {
+ *     @include x-respond-to($breakpoint-medium) { 
+ *         float: left;
+ *         width: 50%;
+ *         @include x-old-ie {
+ *             // These hacks won't appear in the normal stylesheet.
+ *             // Serve fixed-width layout to oldIE (overwrite width declaration above).
+ *             // Alternatively, you could remove this and set fixed width to the parent instead.
+ *             width: x-relative-size(384, $base-font-size); 
+ *         }
+ *     }
+ * }
+ * 
+ */
+/* ==========================================================================
+   @group Layout
+   ========================================================================== */
+/* 
+ * Center the layout and set max width too. 
+ */
+/* line 53, ../scss/components/_layout.scss */
+.l-constrained {
+  width: 95%;
+  max-width: 62em;
+  /* Make sure the grid doesn't get too wide */
+  margin: 0 auto;
+  width: 48em;
+  /* Serve fixed-width layout to oldIE */
+}
+
+/* Grid container (row), containing any number of cells/columns 
+   ========================================================================== */
+/* line 66, ../scss/components/_layout.scss */
+.l-row {
+  margin: 0 auto 20px;
+  *zoom: 1;
+}
+/* line 19, ../scss/mixins/_all.scss */
+.l-row:before, .l-row:after {
+  content: "";
+  display: table;
+}
+/* line 23, ../scss/mixins/_all.scss */
+.l-row:after {
+  clear: both;
+}
+
+/* Grid cells. No explicit width by default. Extend with `.l-cell--n` classes.
+   ========================================================================== */
+/**
+* In order to work around browsers' different rounding behaviours, we'll float 
+* the last column in a row to the right so the edge aligns. You can override 
+* that behaviour by adding class="l-cell-end" in the last column. 
+* 
+* Idea taken from: 
+* http://foundation.zurb.com/docs/grid.php 
+* http://www.netmagazine.com/tutorials/building-modern-grid-system
+* 
+*/
+/* line 85, ../scss/components/_layout.scss */
+.l-cell {
+  float: left;
+  min-height: 1px;
+  position: relative;
+  margin: 0 0 0 4%;
+  /*
+   * Allow the browser to break lines within words in order to prevent overflow 
+   * when an otherwise unbreakable string is too long to fit in its containing cell.
+   */
+  word-wrap: break-word;
+}
+
+/* Cancel the left margin in the first item */
+/* line 101, ../scss/components/_layout.scss */
+.l-cell:first-child,
+.l-cell .l-cell:first-child {
+  margin-left: 0;
+}
+
+/* line 105, ../scss/components/_layout.scss */
+.l-cell:last-child {
+  float: right;
+}
+
+/* Cell modifiers
+   ========================================================================== */
+/* line 115, ../scss/components/_layout.scss */
+.l-cell.l-cell-end {
+  float: left;
+}
+
+/* Cell dimensions (assuming we're using six columns; this can be changed in _settings.scss)
+   ========================================================================== */
+/* line 126, ../scss/components/_layout.scss */
+.l-cell-1 {
+  width: 13.3333333333333%;
+}
+
+/* line 132, ../scss/components/_layout.scss */
+.l-cell-2 {
+  width: 30.6666666666667%;
+}
+
+/* line 138, ../scss/components/_layout.scss */
+.l-cell-3 {
+  width: 48%;
+}
+
+/* line 144, ../scss/components/_layout.scss */
+.l-cell-4 {
+  width: 65.3333333333333%;
+}
+
+/* line 150, ../scss/components/_layout.scss */
+.l-cell-5 {
+  width: 82.6666666666667%;
+}
+
+/* line 156, ../scss/components/_layout.scss */
+.l-cell-6 {
+  width: 100%;
+}
+
+/* line 164, ../scss/components/_layout.scss */
+.l-cell-3 .l-cell-2 {
+  margin-left: 8.33333333333333%;
+  width: 63.8888888888889%;
+}
+
+/* line 170, ../scss/components/_layout.scss */
+.l-cell-3 .l-cell-1 {
+  margin-left: 8.33333333333333%;
+  width: 27.7777777777778%;
+}
+
+/* 2. Layout                          */
+/* ==========================================================================
+   @group Module imports
+   ========================================================================== */
+/* ==========================================================================
+   @group Buttons
+   ========================================================================== */
+/* line 8, ../scss/components/modules/_buttons.scss */
+.btn,
+button,
+input[type="button"],
+input[type="submit"] {
+  padding: 0.5em;
+  text-align: center;
+  cursor: pointer;
+  color: #222222;
+  border: 1px solid #dddddd;
+  margin: 0 0 1.5em;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZjhmOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f8f8f8), color-stop(100%, #dddddd));
+  background-image: -webkit-linear-gradient(#f8f8f8, #dddddd);
+  background-image: -moz-linear-gradient(#f8f8f8, #dddddd);
+  background-image: -o-linear-gradient(#f8f8f8, #dddddd);
+  background-image: linear-gradient(#f8f8f8, #dddddd);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.03) 0 -1px 0 inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.03) 0 -1px 0 inset;
+  box-shadow: rgba(0, 0, 0, 0.03) 0 -1px 0 inset;
+}
+
+/* Buttons that are actually links.
+   ========================================================================== */
+/* line 25, ../scss/components/modules/_buttons.scss */
+a.btn {
+  white-space: nowrap;
+}
+
+/* line 31, ../scss/components/modules/_buttons.scss */
+a.btn:hover,
+a.btn:focus,
+a.btn:active {
+  color: #222222;
+}
+
+/* ==========================================================================
+   @group Forms
+   ========================================================================== */
+/* 
+ * Override default fieldset styles. 
+ */
+/* line 8, ../scss/components/modules/_forms.scss */
+fieldset {
+  border: 1px solid #dddddd;
+}
+
+/* 
+ * Allow only vertical resizing of textareas. 
+ */
+/* line 15, ../scss/components/modules/_forms.scss */
+textarea {
+  resize: vertical;
+}
+
+/* 
+ * Wrapper for label and input groups (radio buttons, checkboxes). 
+ */
+/* 
+ * Wrapper for label and input. 
+ */
+/* line 29, ../scss/components/modules/_forms.scss */
+.control {
+  margin: 0.8em 0;
+}
+
+/* 
+ * Wrapper for label and input inside a group (radio buttons, checkboxes). 
+ */
+/* 
+ * Wrapper for submit button. 
+ */
+/* 
+ * Label for single inputs (and legend for input groups). 
+ */
+/* line 56, ../scss/components/modules/_forms.scss */
+label {
+  cursor: pointer;
+}
+
+/*
+ * See http://www.456bereastreet.com/archive/201210/how_to_line_wrap_text_in_legend_elements_even_in_ie/
+ */
+/* line 63, ../scss/components/modules/_forms.scss */
+legend {
+  display: table;
+  /* Enable line-wrapping in IE8+ */
+}
+
+/* 
+ * Radio button and checkbox labels. 
+ */
+/* 
+ * Message next to input elements. 
+ */
+/* 
+ * Text input styles. 
+ */
+/*input*/
+/* line 87, ../scss/components/modules/_forms.scss */
+.control-text,
+select,
+textarea {
+  border: 1px solid #dddddd;
+  padding: 0.25em;
+}
+
+/* ==========================================================================
+   @group Logo
+   ========================================================================== */
+/* Site logo */
+/*a*/
+/* line 6, ../scss/components/modules/_logo.scss */
+.logo {
+  color: #222222;
+  display: block;
+  padding: 1.5em 0;
+  /* 24 / 32 = 0.75em */
+  border-bottom: none;
+}
+
+/*a*/
+/* line 15, ../scss/components/modules/_logo.scss */
+.logo:hover,
+.logo:active,
+.logo:focus {
+  color: #222222;
+}
+
+/* ==========================================================================
+   @group Media Object
+   http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/ 
+   http://jsfiddle.net/necolas/rZvEF/
+   ========================================================================== */
+/*
+ * 1. Create new block formatting context in modern browsers
+ * 2. Avoid shrink-wrap behaviour of table-cell
+ * 3. Override for IE6/7
+ * 4. Create new block formatting context in IE6/7
+ * Alternatively, use `overflow:hidden` if clipping is OK
+ * www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
+ * facebook.com
+ */
+/* line 16, ../scss/components/modules/_media-object.scss */
+.media {
+  margin: 0 0 1em;
+  *zoom: 1;
+}
+/* line 18, ../scss/components/modules/_media-object.scss */
+.media p {
+  margin: 0 0 1em;
+}
+/* line 19, ../scss/mixins/_all.scss */
+.media:before, .media:after {
+  content: "";
+  display: table;
+}
+/* line 23, ../scss/mixins/_all.scss */
+.media:after {
+  clear: both;
+}
+
+/* line 24, ../scss/components/modules/_media-object.scss */
+.media-img {
+  float: left;
+  margin: 0 10px 0 0;
+}
+/* line 27, ../scss/components/modules/_media-object.scss */
+.media-img img {
+  display: block;
+}
+
+/* line 31, ../scss/components/modules/_media-object.scss */
+.media-img-ext {
+  float: right;
+  margin: 0 0 0 10px;
+}
+
+/* line 35, ../scss/components/modules/_media-object.scss */
+.media-body {
+  display: table-cell;
+  /* 1 */
+  width: 10000px;
+  /* 2 */
+  *width: auto;
+  /* 3 */
+  *zoom: 1;
+  /* 4 */
+}
+
+/*
+ * Reusable  icons
+ */
+/* line 45, ../scss/components/modules/_media-object.scss */
+.media-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin: 0 5px 0 0;
+  background: url("http://www.akikoo.org/wp-content/img/one-web-boilerplate/img-50.jpg");
+}
+
+/* line 53, ../scss/components/modules/_media-object.scss */
+.media-icon-a {
+  background-position: 0 0;
+}
+
+/* ==========================================================================
+   @group Styleguide display and source --Not for PROD.
+   ========================================================================== */
+/* 
+ * Styleguide module heading.
+ */
+/* line 8, ../scss/components/modules/_styleguide.scss */
+.heading-styleguide {
+  padding: 0.285714285714286em 1%;
+  border-left: 0.5em solid #fee620;
+  /* 24 / 48 */
+  margin: 0 0 1.14285714285714em;
+  /* Override default */
+}
+
+/* 
+ * Module source wrapper.
+ */
+/*textarea*/
+/* line 17, ../scss/components/modules/_styleguide.scss */
+.source-styleguide {
+  width: 100%;
+  border: 1px solid #dddddd;
+  overflow: auto;
+  padding: 1em;
+  font-size: 0.6875em;
+  line-height: 1.45454545454546;
+  /* Custom line-height */
+  font-family: "Bitstream Vera Sans", Consolas, Menlo, "Lucida Console", "Liberation Mono", Courier, monospace;
+  box-shadow: none;
+  margin: 0 0 1.5em;
+  height: 12em;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  display: none;
+  display: block;
+}
+
+/* Colors.
+   ========================================================================== */
+/* line 38, ../scss/components/modules/_styleguide.scss */
+.colors-styleguide li {
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  border: 1px solid #dddddd;
+}
+
+/* line 45, ../scss/components/modules/_styleguide.scss */
+.colors-styleguide-1 {
+  background: #222222;
+}
+
+/* line 49, ../scss/components/modules/_styleguide.scss */
+.colors-styleguide-2 {
+  background: #eeeeee;
+}
+
+/* line 53, ../scss/components/modules/_styleguide.scss */
+.colors-styleguide-3 {
+  background: #dddddd;
+}
+
+/* line 57, ../scss/components/modules/_styleguide.scss */
+.colors-styleguide-4 {
+  background: #fee620;
+}
+
+/* Type.
+   ========================================================================== */
+/* line 64, ../scss/components/modules/_styleguide.scss */
+.font-family-sans {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 68, ../scss/components/modules/_styleguide.scss */
+.font-family-serif {
+  font-family: Cambria, Georgia, Times, "Times New Roman";
+}
+
+/* line 72, ../scss/components/modules/_styleguide.scss */
+.font-family-monospace {
+  font-family: "Bitstream Vera Sans", Consolas, Menlo, "Lucida Console", "Liberation Mono", Courier, monospace;
+}
+
+/* Temp grid visualizations for the Style Guide module.
+   ========================================================================== */
+/* First level cells */
+/* line 80, ../scss/components/modules/_styleguide.scss */
+.l-row-styleguide .l-cell {
+  background: #ddd;
+}
+
+/* Nested cells */
+/* line 84, ../scss/components/modules/_styleguide.scss */
+.l-row-styleguide .l-cell .l-cell {
+  background: #aaa;
+}
+
+/* 3. Modules                         */
+/* ==========================================================================
+   @group State
+   ========================================================================== */
+/* 4. State (Layout and Modules)      */
+/* ==========================================================================
+   @group Theme
+   ========================================================================== */
+/* 5. Theme styles (not always needed)*/
