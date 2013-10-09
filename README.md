@@ -114,6 +114,8 @@ For details about all the tasks and processes, see documentation in Gruntfile:
 https://github.com/akikoo/grunt-frontend-workflow/blob/master/Gruntfile.js, and 
 other files.
 
-Be sure to exclude `.sass-cache`, `node_modules` and `webroot-built` directories from version control.
+Be sure to exclude `.sass-cache`, `node_modules` and `webroot-built` directories 
+from version control. You should probably exclude `/www/js/lib` as well because 
+third-party libraries are managed locally by Bower.
 
 I hope this framework is as useful to you as it is for me. Have fun! 
