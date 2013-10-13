@@ -71,6 +71,8 @@ module.exports = function (grunt) {
                     // Defaults to the project Gruntfile's directory.
                     bases: ['<%= config.webroot %>'],
 
+                    // Start an express server using your own express application script. 
+                    // Server.js contains a custom RESTful API.
                     server: path.resolve('./server.js'),
 
                     // if you just specify `true`, default port `35729` will be used.

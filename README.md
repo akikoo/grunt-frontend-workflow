@@ -71,6 +71,15 @@ listed in the current directory's bower.json.
 
     bower install
 
+###MongoDB
+
+By default, Express application framework and MongoDB are used for saving and persisting 
+models with REST. For installing MongoDB, see http://docs.mongodb.org/manual/installation/. 
+If you don't need a local RESTful API or database or if you use other service, 
+comment out this line in Gruntfile.js (line number 76): 
+
+    server: path.resolve('./server.js'),
+
 ###Grunt
 See http://gruntjs.com/getting-started.
 
@@ -78,11 +87,8 @@ See http://gruntjs.com/getting-started.
     npm install -g grunt-cli
 
 After installing grunt-cli (Grunt's command line interface) globally, go to the 
-project folder and install grunt locally.
-
-    npm install grunt
-
-Now install all the dependencies (listed in package.json)
+project folder and install all the dependencies listed in package.json. This will 
+install a local version of Grunt as well.
 
     npm install 
 
@@ -93,6 +99,15 @@ That's it.
 To start developing, go to the project folder in your terminal and run
 
     grunt 
+
+Note that if you installed MongoDB as mentioned above, you need to 
+start the service by first starting the mongod process in terminal: 
+
+    mongod
+
+Then, open the mongo shell:   
+
+    mongo
 
 Then go to http://localhost:9001/ to view your site. You can also access your 
 local site from another device on the same LAN by using your IP address instead 
