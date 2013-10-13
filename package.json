@@ -1,6 +1,6 @@
 {
     "name": "Grunt-Frontend-Workflow",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Structured, modular and test-driven front-end development and build workflow with Grunt, including common tasks such as compiling modular html patterns, compiling AMD based modules using RequireJS, watching/compiling Sass/Compass modules into CSS, watching/linting CSS/JS code, optimizing images, generating icons, generating dynamic build headers and YUIdoc documentation, and running unit tests.",
     "main": "Gruntfile.js",
     "author": {
@@ -37,7 +37,10 @@
         "karma-jasmine": "~0.1.3",
         "karma-requirejs": "~0.1.0",
         "karma-coffee-preprocessor": "~0.1.0",
-        "karma-phantomjs-launcher": "~0.1.0"
+        "karma-phantomjs-launcher": "~0.1.0",
+        "grunt-express": "~1.2.1",
+        "express": "~3.4.0",
+        "mongoose": "~3.6.20"
     },
     "keywords": [
         "grunt",
