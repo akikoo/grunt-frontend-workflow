@@ -9,14 +9,8 @@ define(function (require) {
     var AppRouter = require('../app/routers/router');
 
     $(function () {
-
         // Initialize the application router.
-        var App = new AppRouter();
-
-        Backbone.history.start({
-            pushState: false
-        });
-
+        var app = new AppRouter();
     });
 
 });

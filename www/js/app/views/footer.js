@@ -4,35 +4,27 @@
 
 define(['backbone', 'handlebars', 'text!templates/footer.html'],
 
-        function(Backbone, Handlebars, footerTemplate) {
+    function (Backbone, Handlebars, footerTemplate) {
 
-            'use strict';
+        'use strict';
 
-            var FooterView = Backbone.View.extend({
+        var FooterView = Backbone.View.extend({
+            el: '#footer',
 
-                el: '#footer',
+            // Compile our footer template.
+            template: Handlebars.compile(footerTemplate),
 
-                // Compile our footer template.
-                template: Handlebars.compile(footerTemplate),
+            initialize: function () {
+                this.render();
+            },
 
-                initialize: function () {
+            render: function () {
+                // Update el with the cached template.
+                $(this.el).html(this.template());
+                return this;
+            }
+        });
 
-                    this.render();
-
-                },
-
-                render: function () {
-
-                    // Update el with the cached template.
-                    $(this.el).html(this.template());
-
-                    return this;
-
-                }
-
-            });
-
-            return FooterView;
-
-        }
+        return FooterView;
+    }
 );
