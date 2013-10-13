@@ -1,28 +1,25 @@
 /*
  * Gruntfile for the Grunt Front-End Workflow/Boilerplate
- * (previously called Backbone/RequireJS multipage boilerplate). 
- * 
+ * (previously called Backbone/RequireJS multipage boilerplate).
+ *
  * DEV URL: http://localhost:9001/
- * 
+ *
  * @author Aki Karkkainen
  * @url https://github.com/akikoo/grunt-frontend-workflow
  * Twitter: http://twitter.com/akikoo
- * 
+ *
  */
 
-// Needed for `grunt-contrib-livereload`.
-var path        = require('path'),
-    lrSnippet   = require('grunt-contrib-livereload/lib/utils').livereloadSnippet,
-    folderMount = function folderMount(connect, point) {
-        return connect.static(path.resolve(point));
-    };
+
+// Needed for `grunt-express`.
+var path = require('path');
 
 // Grunt configuration wrapper function.
 module.exports = function (grunt) {
 
     'use strict';
 
-    // Configurable paths and other variables. 
+    // Configurable paths and other variables.
     var config = {
         webroot: 'www',
         dist: 'www-built',
@@ -34,7 +31,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
 
         /*
-         * Get configuration options. 
+         * Get configuration options.
          */
         config: config,
 
@@ -46,7 +43,7 @@ module.exports = function (grunt) {
 
 
         /*
-         * Create a dynamic build header. 
+         * Create a dynamic build header.
          */
         banner: '/*! <%= pkg.name %> v<%= pkg.version %> | ' +
             '<%= grunt.template.today("dd-mm-yyyy-hh:MM:ss") %>\n' +
@@ -54,20 +51,30 @@ module.exports = function (grunt) {
             ' Licensed <%= pkg.license %>\n */\n',
 
 
-        /*
-         * Start a static web server. 
+        /**
+         * Start (and supervise) an Express.js web server.
          * DEV URL http://localhost:9001/.
-         * To view the local site on another device on the same LAN, use your master machine's IP address instead, for example http://10.0.0.32:9001/.
+         * To view the local site on another device on the same LAN, use your
+         * master machine's IP address instead, for example http://10.0.0.32:9001/.
          */
-        connect: {
-            livereload: {
+        express: {
+            server: {
                 options: {
-                    port: 9001, // The port on which the webserver will respond.
-                    hostname: '*', // Default 'localhost'. Setting this to '*' will make the server accessible from anywhere. Useful for cross-device testing.
-                    base: '<%= config.webroot %>', // The base (or root) directory from which files will be served. Defaults to the project Gruntfile's directory.
-                    middleware: function (connect, options) {
-                        return [lrSnippet, folderMount(connect, options.base)];
-                    }
+                    // The port on which the webserver will respond.
+                    port: 9001,
+
+                    // Default 'localhost'. Setting this to '*' will make the server
+                    // accessible from anywhere. Useful for cross-device testing.
+                    hostname: '*',
+
+                    // The base (or root) directory from which files will be served.
+                    // Defaults to the project Gruntfile's directory.
+                    bases: ['<%= config.webroot %>'],
+
+                    server: path.resolve('./server.js'),
+
+                    // if you just specify `true`, default port `35729` will be used.
+                    livereload: 1337
                 }
             }
         },
@@ -79,7 +86,8 @@ module.exports = function (grunt) {
         watch: {
             options: {
                 // Reload assets live in the browser.
-                livereload: 35729 // Default livereload listening port.
+                // Default livereload listening port is 35729.
+                livereload: 1337
             },
             html: {
                 files: ['<%= config.webroot %>/html/*.html'],
@@ -103,7 +111,7 @@ module.exports = function (grunt) {
             // Run unit tests with karma (server needs to be already running).
             karma: {
                 files: ['<%= config.testroot %>/spec/*Spec.js'],
-                tasks: ['karma:unit:run'] //NOTE the :run flag
+                tasks: ['karma:unit:run'] // NOTE the :run flag
             }
         },
 
@@ -123,7 +131,9 @@ module.exports = function (grunt) {
                     relativeAssets: true,
                     noLineComments: false,
                     force: true,
-                    raw: 'Sass::Script::Number.precision = 15\n' // Use `raw` since it's not directly available.
+
+                    // Use `raw` since it's not directly available.
+                    raw: 'Sass::Script::Number.precision = 15\n'
                 }
             }
         },
@@ -134,7 +144,8 @@ module.exports = function (grunt) {
          */
         csslint: {
             options: {
-                csslintrc: '.csslintrc' // Get CSSLint options from external file.
+                // Get CSSLint options from external file.
+                csslintrc: '.csslintrc'
             },
             strict: {
                 options: {},
@@ -153,12 +164,14 @@ module.exports = function (grunt) {
         jshint: {
             // Configure JSHint (documented at http://www.jshint.com/docs/).
             options: {
-                jshintrc: '.jshintrc' // Get JSHint options from external file.
+                // Get JSHint options from external file.
+                jshintrc: '.jshintrc'
             },
             // Define the files to lint.
             files: [
                 'Gruntfile.js',
-                '<%= config.webroot %>/js/app/**/*.js' // Only process custom scripts, exclude libraries.
+                // Only process custom scripts, excluding libraries.
+                '<%= config.webroot %>/js/app/**/*.js'
             ]
         },
 
@@ -193,12 +206,24 @@ module.exports = function (grunt) {
                     prefix: '<!-- @',
                     suffix: ' -->'
                 },
-                // Source-destination file mappings where the property name is the source 
-                // file to perform replacements and includes with, and its value is the 
-                // destination directory.
+                // Source-destination file mappings, using Files Array format.
                 files: [
-                    {'<%= config.webroot %>/html/index.html': '<%= config.webroot %>/'},
-                    {'<%= config.webroot %>/html/styleguide.html': '<%= config.webroot %>/'}
+                    {
+                        // Enable dynamic expansion.
+                        expand: true,
+
+                        // Src matches are relative to (but don't include) this path.
+                        cwd: '<%= config.webroot %>/html/',
+
+                        // Actual files to match, relative to the cwd.
+                        src: [
+                            'index.html',
+                            'styleguide.html'
+                        ],
+
+                        // Destination path prefix.
+                        dest: '<%= config.webroot %>/'
+                    }
                 ]
             }
         },
@@ -235,9 +260,9 @@ module.exports = function (grunt) {
                     // Prefix for CSS classnames.
                     cssprefix: 'icon-',
 
-                    // CSS file path prefix - this defaults to "/" and will be 
+                    // CSS file path prefix - this defaults to "/" and will be
                     // placed before the "dest" path when stylesheets are loaded.
-                    // This allows root-relative referencing of the CSS. If you 
+                    // This allows root-relative referencing of the CSS. If you
                     // don't want a prefix path, set to to "".
                     cssbasepath: '/'
 
@@ -252,21 +277,45 @@ module.exports = function (grunt) {
         requirejs: {
             compile: {
                 options: {
-                    baseUrl: 'js',                          // The JS source dir, relative to the 'appDir' if set below. No forward slash here!
-                    appDir: '<%= config.webroot %>',        // The top level assets directory, relative to this file. All the files from this directory will be copied to 'dir'.
-                    dir: '<%= config.dist %>',              // The CSS and JS output dir, relative to this file.
-                    mainConfigFile: '<%= config.webroot %>/js/config.js', // Include the main configuration file (paths, shim). Relative to this file.
-                    optimize: 'uglify',                     // (default) uses UglifyJS to minify the code.
-                    skipDirOptimize: true,                  // Set to true, to skip optimizing other non-build layer JS files (speeds up builds).
-                    optimizeCss: 'standard',                // @import inlining, comment removal and line returns.
-                    fileExclusionRegExp: /^\.|\.((json))|scss$/, // If the regexp matches, it means the file/directory will be excluded.
+                    // The JS source dir, relative to the 'appDir' if set below.
+                    // No forward slash here!
+                    baseUrl: 'js',
 
-                    // List of modules that will be optimized. All their immediate and deep dependencies will be included.
+                    // The top level assets directory, relative to this file.
+                    // All the files from this directory will be copied to 'dir'.
+                    appDir: '<%= config.webroot %>',
+
+                    // The CSS and JS output dir, relative to this file.
+                    dir: '<%= config.dist %>',
+
+                    // Include the main configuration file (paths, shim).
+                    // Relative to this file.
+                    mainConfigFile: '<%= config.webroot %>/js/config.js',
+
+                    // (default) uses UglifyJS to minify the code.
+                    optimize: 'uglify',
+
+                    // Set to true, to skip optimizing other non-build layer JS
+                    // files (speeds up builds).
+                    skipDirOptimize: true,
+
+                    // @import inlining, comment removal and line returns.
+                    optimizeCss: 'standard',
+
+                    // If the regexp matches, it means the file/directory will
+                    // be excluded.
+                    fileExclusionRegExp: /^\.|\.((json))|scss$/,
+
+                    // List of modules that will be optimized. All their immediate
+                    // and deep dependencies will be included.
                     modules: [
-                        // First set up the common build layer. Module names are relative to 'baseUrl'.
+                        // First set up the common build layer. Module names are
+                        // relative to 'baseUrl'.
                         {
                             name: 'config',
-                            // List common dependencies here. Only need to list top level dependencies, "include" will find nested dependencies.
+                            // List common dependencies here. Only need to list
+                            // top level dependencies, "include" will find nested
+                            // dependencies.
                             include: [
                                 'jquery',
                                 'backbone',
@@ -277,14 +326,16 @@ module.exports = function (grunt) {
                         },
 
 
-                        // NOTE: If you're building a Single Page Application, you can combine the shim 
-                        // config with your page logic, resulting in only one http request (plus requirejs itself), 
+                        // NOTE: If you're building a Single Page Application, 
+                        // you can combine the shim config with your page logic, 
+                        // resulting in only one http request (plus requirejs itself),
                         // like so:
 
                         /*
                         {
                             name: 'config',
-                            // List common dependencies here. Only need to list top level dependencies, "include" will find nested dependencies.
+                            // List common dependencies here. Only need to list 
+                            // top level dependencies, "include" will find nested dependencies.
                             include: [
                                 'jquery',
                                 'backbone',
@@ -324,12 +375,15 @@ module.exports = function (grunt) {
          * Grunt plugin for karma test runner.
          */
         karma: {
+            // This is used in `default` (DEV) task.
             unit: {
-              configFile: 'karma.conf.js',
-              background: true // Don't block subsequent grunt tasks.
+                configFile: 'karma.conf.js',
+
+                // Don't block subsequent grunt tasks.
+                background: true
             },
             // Continuous integration mode: run tests once in PhantomJS browser.
-            // Run this with `grunt karma:continuous`
+            // Run this with `grunt karma:continuous`. This is used in `dist` (BUILD) task. 
             continuous: {
                 configFile: 'karma.conf.js',
                 singleRun: true,
@@ -344,13 +398,23 @@ module.exports = function (grunt) {
         imagemin: {
             dist: {
                 options: {
-                    optimizationLevel: 3 // PNG only.
+                    // PNG only.
+                    optimizationLevel: 3
                 },
                 files: [{
-                    expand: true,                       // Enable dynamic expansion.
-                    cwd: '<%= config.webroot %>/img/',  // Src matches are relative to this path.
-                    src: '**/*.{png,jpg,jpeg}',         // Actual pattern(s) to match.
-                    dest: '<%= config.dist %>/img/'     // Destination path prefix.
+                    // Enable dynamic expansion.
+                    expand: true,
+
+                    // Src matches are relative to (but don't include) this path.
+                    cwd: '<%= config.webroot %>/img/',
+
+                    // Actual pattern(s) to match, relative to the cwd.
+                    src: [
+                        '**/*.{png,jpg,jpeg}'
+                    ],
+                        
+                    // Destination path prefix.
+                    dest: '<%= config.dist %>/img/'
                 }]
             }
         },
@@ -361,21 +425,39 @@ module.exports = function (grunt) {
          */
         concat: {
             options: {
-                stripBanners: true,                     // Strip any existing JavaScript banner comments from source files.
-                banner: '<%= banner %>'                 // Get dynamic build header.
+                // Strip any existing JavaScript banner comments from source files.
+                stripBanners: true,
+
+                // Get dynamic build header.
+                banner: '<%= banner %>'
             },
             dist: {
                 files: [
                     {
-                        expand: true,                   // Enable dynamic expansion.
-                        cwd: '<%= config.dist %>/',     // Src matches are relative to this path.
-                        src: [                          // Actual pattern(s) to match.
-                            'css/*.css',                // Process only main css files in CSS root.
-                            'js/app/*.js',              // Process only main js files in JS app root.
-                            'js/config.js'              // Process also the common layer. 
+                        // Enable dynamic expansion.
+                        expand: true,
+
+                        // Src matches are relative to (but don't include) this path.
+                        cwd: '<%= config.dist %>/',
+
+                        // Actual pattern(s) to match, relative to the cwd.
+                        src: [
+                            // Process only main css files in CSS root.
+                            'css/*.css',
+
+                            // Process only main js files in JS app root.
+                            'js/app/*.js',
+
+                            // Process also the common layer.
+                            'js/config.js'
                         ],
-                        dest: '<%= config.dist %>/',    // Destination path prefix.
-                        nonull: false                   // Set nonull to true if you want the concat task to warn if a given file is missing or invalid.
+
+                        // Destination path prefix.
+                        dest: '<%= config.dist %>/',
+
+                        // Set nonull to true if you want the concat task to warn
+                        // if a given file is missing or invalid.
+                        nonull: false
                     }
                 ]
             }
@@ -385,9 +467,8 @@ module.exports = function (grunt) {
 
 
     // These plugins provide necessary tasks.
+    grunt.loadNpmTasks('grunt-express');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-livereload');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -399,28 +480,28 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-concat');
 
-
     // The default (DEV) task can be run just by typing "grunt" on the command line.
     grunt.registerTask('default', [
         'includereplace',
         'compass',
         'csslint',
         'jshint',
-        'connect',
-        'karma:unit', // On change, run the tests specified in the unit target using the already running karma server.
+        'express',
+        // On change, run the tests specified in the unit target using the already running karma server.
+        'karma:unit',
         'watch'
     ]);
 
 
-    // The optimized production build would be run by typing "grunt dist" on the command line.
+    // The optimized (DIST) production build would be run by typing "grunt dist" on the command line.
     grunt.registerTask('dist', [
         'includereplace',
         'compass',
-        'grunticon',
         'csslint',
         'jshint',
-        'connect',
-        'karma:continuous', // Run the tests specified in the continuous target using the already running karma server.
+        'express',
+        // Run the tests specified in the continuous target using the already running karma server.
+        'karma:continuous',
         'requirejs',
         'yuidoc',
         'imagemin',
@@ -428,7 +509,7 @@ module.exports = function (grunt) {
     ]);
 
 
-    // The icons generator would be run by typing "grunt icons" on the command line.
+    // The icons generator (ICONS) would be run by typing "grunt icons" on the command line.
     grunt.registerTask('icons', [
         'grunticon'
     ]);
