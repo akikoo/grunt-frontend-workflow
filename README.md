@@ -102,7 +102,11 @@ On OS X, this worked for me using the terminal:
 
     ## Try it
     mongo -version
+
+    ## Start the mongod process
     mongod
+
+    ## Open the mongo shell (in second terminal tab/window)
     mongo
 
 If you don't need a local RESTful API or database, or if you use other service,
