@@ -16,7 +16,10 @@ that uses **Sass** preprocessor (http://sass-lang.com/) and **Compass**
 (http://compass-style.org/), with **SMACSS** (Scalable and Modular Architecture
 for CSS, http://smacss.com/) and some **OOCSS** (Object-Oriented CSS,
 http://oocss.org/). You can just drop the whole /webroot/assets/scss directory from
-One Web Boilerplate into /www directory in Grunt Front-End Workflow and it will work.
+One Web Boilerplate into /www directory in Grunt Front-End Workflow and it will work, 
+with only one small path change in /scss/common/_base.scss: 
+
+Change line `@import "../../assets/css/common/normalize.css";` to this: `@import "common/normalize.css";`
 
 The goal of this workflow is to support modularity and code reuse by organizing
 code into both common and page-specific packages. RequireJS setup is adapted from
