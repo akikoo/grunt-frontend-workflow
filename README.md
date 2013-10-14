@@ -73,27 +73,33 @@ listed in the current directory's bower.json.
 
 ###MongoDB
 
-By default, Express application framework and MongoDB are used for persisting models 
+By default, Express application framework and MongoDB are used for persisting models
 with REST API. For installing MongoDB, see http://docs.mongodb.org/manual/installation/.
 If you're on OS X, see http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/.
 
 Be sure to check the links above, to install the correct MongoDB version for your environment.
-On OS X, this worked for me: 
+On OS X, this worked for me using the terminal:
 
     ## Go to temp folder
     cd Downloads/
+
     ## Download MongoDB
     curl http://downloads.mongodb.org/osx/mongodb-osx-x86_64-2.4.6.tgz > mongodb.tgz
+
     ## Extract it
     tar -zxvf mongodb.tgz
+
     ## Move to generic location
     mv -n mongodb-osx-x86_64-2.4.6/ /usr/local/mongodb
+
     ## Create data dir and fix permissions
     sudo mkdir -p /data/db
     sudo chown `id -u` /data/db
+
     ## Assign $PATH environment variables in .profile or .bash_profile
     export MONGO_PATH=/usr/local/mongodb
     export PATH=$PATH:$MONGO_PATH/bin
+
     ## Try it
     mongo -version
     mongod
