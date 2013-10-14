@@ -77,6 +77,10 @@ By default, Express application framework and MongoDB are used for persisting mo
 with REST API. For installing MongoDB, see http://docs.mongodb.org/manual/installation/.
 If you're on OS X, see http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/.
 
+In this project there's also a PHP REST API in /api directory (using Slim framework),
+and a MySQL database dump `itemdb.sql` if you want to use those for prototyping.
+I've recently switched to using the Express RESTful server and MongoDB instead.
+
 Be sure to check the links above, to install the correct MongoDB version for your environment.
 On OS X, this worked for me using the terminal:
 
@@ -113,6 +117,8 @@ If you don't need a local RESTful API or database, or if you use other service,
 comment out this line in Gruntfile.js (line number 76):
 
     // server: path.resolve('./server.js'),
+
+Remember also to adapt the service URL in /www/js/app/collections/items.js if necessary.
 
 ###Grunt
 See http://gruntjs.com/getting-started.
