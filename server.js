@@ -1,14 +1,24 @@
-/**
+/*
+ * Server script for Express web application framework. Contains a custom REST API 
+ * and MongoDB integration, for prototyping applications with RESTful back-end.
+ * 
+ * DEV URL: http://localhost:9001/
  *
- * http://localhost:9001/
+ * @author Aki Karkkainen
+ * Adapted from the following sources (among others):
+ *     http://addyosmani.github.io/backbone-fundamentals/#creating-the-back-end
+ *     https://npmjs.org/package/grunt-express
+ *     http://mongoosejs.com/docs/index.html
+ * @url https://github.com/akikoo/grunt-frontend-workflow
+ * Twitter: http://twitter.com/akikoo
  *
  */
 
 // Module dependencies.
-var application_root = __dirname,
+var approot = __dirname,
 
     // Public www root.
-    www_root = 'www', 
+    webroot = 'www', 
 
     // Web framework.
     express = require('express'),
@@ -16,22 +26,33 @@ var application_root = __dirname,
     // Utilities for dealing with file paths.
     path = require('path'),
 
+    // Express server instance.
+    app,
+
     // MongoDB integration.
     mongoose = require('mongoose'),
-    app,
+
+    // MongoDB database name.
+    dbname = 'prototype-app',
+
+    // MongoDB connection link.
+    dbconn,
+
+    // MongoDB schema.
     Item,
-    ItemModel,
-    db;
+
+    // MongoDB model.
+    ItemModel;
 
 // Create server.
 app = express();
 
 // Connect to the database and verify connection.
-mongoose.connect('mongodb://localhost/prototype-app');
-db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function callback () {
-  console.log('Database connection successful.');
+mongoose.connect('mongodb://localhost/' + dbname);
+dbconn = mongoose.connection;
+dbconn.on('error', console.error.bind(console, 'connection error:'));
+dbconn.once('open', function callback () {
+    console.log('Database connection successful.');
 });
 
 //Schemas.
@@ -43,7 +64,7 @@ Item = new mongoose.Schema({
 // Models.
 ItemModel = mongoose.model('Item', Item);
 
-// Configure server
+// Configure server.
 app.configure(function () {
     // Parse request body and populate request.body.
     app.use(express.bodyParser());
@@ -55,7 +76,7 @@ app.configure(function () {
     app.use(app.router);
 
     // Where to serve static content.
-    app.use(express.static(path.join(application_root, www_root)));
+    app.use(express.static(path.join(approot, webroot)));
 
     // Show all errors in development.
     app.use(express.errorHandler({dumpExceptions: true, showStack: true}));
@@ -65,7 +86,7 @@ app.configure(function () {
 
 // Main index file.
 app.get('/', function(request, response) {
-    response.sendfile(__dirname + '/' + www_root + '/index.html');
+    response.sendfile(__dirname + '/' + webroot + '/index.html');
 });
 
 // REST API root.
@@ -73,11 +94,11 @@ app.get('/api', function (request, response) {
     response.send('Library API is running');
 });
 
-//Get a list of all items
+//Get a list of all items.
 app.get('/api/items', function (request, response) {
-    console.log('Getting a list of all items');
     return ItemModel.find(function (err, items) {
         if (!err) {
+            console.log('Getting a list of all items');
             return response.send(items);
         } else {
             return console.log(err);
@@ -85,7 +106,7 @@ app.get('/api/items', function (request, response) {
     });
 });
 
-//Get a single item by id
+//Get a single item by id.
 app.get('/api/items/:id', function (request, response) {
     return ItemModel.findById(request.params.id, function (err, item) {
         if (!err) {
@@ -97,7 +118,7 @@ app.get('/api/items/:id', function (request, response) {
     });
 });
 
-//Insert a new item
+//Insert a new item.
 app.post('/api/items', function (request, response) {
     var item = new ItemModel({
         name: request.body.name,
@@ -113,7 +134,7 @@ app.post('/api/items', function (request, response) {
     return response.send(item);
 });
 
-//Update an item
+//Update an item.
 app.put('/api/items/:id', function (request, response) {
     return ItemModel.findById(request.params.id, function (err, item) {
         item.name = request.body.name;
@@ -130,7 +151,7 @@ app.put('/api/items/:id', function (request, response) {
     });
 });
 
-//Delete an item
+//Delete an item.
 app.delete('/api/items/:id', function (request, response) {
     return ItemModel.findById(request.params.id, function (err, item) {
         var itemName = item.name;
