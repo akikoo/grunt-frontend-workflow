@@ -1,7 +1,7 @@
 /*
- * Server script for Express web application framework. Contains a custom REST API 
+ * Server script for Express web application framework. Contains a custom REST API
  * and MongoDB integration, for prototyping applications with RESTful back-end.
- * 
+ *
  * DEV URL: http://localhost:9001/
  *
  * @author Aki Karkkainen
@@ -18,7 +18,7 @@
 var approot = __dirname,
 
     // Public www root.
-    webroot = 'www', 
+    webroot = 'www',
 
     // Web framework.
     express = require('express'),
@@ -84,17 +84,26 @@ app.configure(function () {
 
 // Routes.
 
-// Main index file.
+/*
+ * HTTP GET /.
+ * Main index file.
+ */
 app.get('/', function(request, response) {
     response.sendfile(__dirname + '/' + webroot + '/index.html');
 });
 
-// REST API root.
+/*
+ * HTTP GET /api.
+ * REST API root.
+ */
 app.get('/api', function (request, response) {
     response.send('Library API is running');
 });
 
-//Get a list of all items.
+/*
+ * HTTP GET /api/items.
+ * Get a list of all items.
+ */
 app.get('/api/items', function (request, response) {
     return ItemModel.find(function (err, items) {
         if (!err) {
@@ -106,7 +115,10 @@ app.get('/api/items', function (request, response) {
     });
 });
 
-//Get a single item by id.
+/*
+ * HTTP GET /api/items/:id.
+ * Get a single item by id.
+ */
 app.get('/api/items/:id', function (request, response) {
     return ItemModel.findById(request.params.id, function (err, item) {
         if (!err) {
@@ -118,7 +130,10 @@ app.get('/api/items/:id', function (request, response) {
     });
 });
 
-//Insert a new item.
+/*
+ * HTTP POST /api/items.
+ * Create a new item.
+ */
 app.post('/api/items', function (request, response) {
     var item = new ItemModel({
         name: request.body.name,
@@ -134,7 +149,10 @@ app.post('/api/items', function (request, response) {
     return response.send(item);
 });
 
-//Update an item.
+/*
+ * HTTP PUT /api/items/:id.
+ * Update an item.
+ */
 app.put('/api/items/:id', function (request, response) {
     return ItemModel.findById(request.params.id, function (err, item) {
         item.name = request.body.name;
@@ -151,7 +169,10 @@ app.put('/api/items/:id', function (request, response) {
     });
 });
 
-//Delete an item.
+/*
+ * HTTP DELETE /api/items/:id.
+ * Delete an item.
+ */
 app.delete('/api/items/:id', function (request, response) {
     return ItemModel.findById(request.params.id, function (err, item) {
         var itemName = item.name;
