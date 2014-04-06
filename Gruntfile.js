@@ -101,7 +101,8 @@ module.exports = function (grunt) {
                 files: ['<%= config.webroot %>/scss/**/*.scss'],
                 tasks: [
                     'compass',
-                    'csslint'
+                    'csslint',
+                    'autoprefixer'
                 ]
             },
             js: {
@@ -140,6 +141,23 @@ module.exports = function (grunt) {
             }
         },
 
+        /*
+         * Parse CSS and add vendor-prefixed CSS properties using the Can I Use database.
+         * Based on Autoprefixer.
+         */
+        autoprefixer: {
+            options: {
+                // Task-specific options go here.
+                browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'] // Default.
+            },
+            // Target-specific file lists and/or options go here.
+            // if you have specified only the `src` param, the destination will 
+            // be set automatically, so source files will be overwritten.
+            dist: {
+                // Process the precompiled styles.
+                src: '<%= config.webroot %>/css/*.css'
+            }
+        },
 
         /*
          * Lint CSS files.
@@ -481,12 +499,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-autoprefixer');
 
     // The default (DEV) task can be run just by typing "grunt" on the command line.
     grunt.registerTask('default', [
         'includereplace',
         'compass',
         'csslint',
+        'autoprefixer',
         'jshint',
         'express',
         // On change, run the tests specified in the unit target using the already running karma server.
@@ -500,6 +520,7 @@ module.exports = function (grunt) {
         'includereplace',
         'compass',
         'csslint',
+        'autoprefixer',
         'jshint',
         'express',
         // Run the tests specified in the continuous target using the already running karma server.

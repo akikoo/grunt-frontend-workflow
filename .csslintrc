@@ -3,7 +3,7 @@
     "display-property-grouping": true,
     "duplicate-properties": false,
     "empty-rules": 2,
-    "known-properties": 2,
+    "known-properties": false,
 
     "adjoining-classes": false,
     "box-sizing": false,
