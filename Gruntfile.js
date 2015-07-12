@@ -83,6 +83,25 @@ module.exports = function (grunt) {
 
 
         /*
+         * Keep multiple browsers & devices in sync when developing.
+         * For options, see http://www.browsersync.io/docs/options/
+         */
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src : [
+                        '<%= config.webroot %>/css/*.css'
+                    ]
+                },
+                options: {
+                    watchTask: true,
+                    proxy: 'http://localhost:9001'
+                }
+            }
+        },
+
+
+        /*
          * Run predefined tasks whenever watched file patterns are added, changed or deleted.
          */
         watch: {
@@ -500,6 +519,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-browser-sync');
 
     // The default (DEV) task can be run just by typing "grunt" on the command line.
     grunt.registerTask('default', [
@@ -511,6 +531,7 @@ module.exports = function (grunt) {
         'express',
         // On change, run the tests specified in the unit target using the already running karma server.
         'karma:unit',
+        'browserSync',
         'watch'
     ]);
 
