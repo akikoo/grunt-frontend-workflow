@@ -39,9 +39,10 @@
     "karma-html2js-preprocessor": "~0.1.0",
     "karma-jasmine": "~0.1.3",
     "karma-phantomjs-launcher": "~0.1.0",
-    "karma-requirejs": "~0.1.0",
+    "karma-requirejs": "^0.2.2",
     "karma-script-launcher": "~0.1.0",
-    "mongoose": "~3.6.20"
+    "mongoose": "~3.6.20",
+    "requirejs": "^2.1.18"
   },
   "keywords": [
     "grunt",
